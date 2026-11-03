@@ -11,8 +11,11 @@ export const dynamic = 'force-dynamic';
 const inter = Inter({ subsets: ['latin', 'latin-ext'], variable: '--font-inter', display: 'swap' });
 
 export const metadata: Metadata = {
-  title: 'Wardrowbe',
+  title: 'Kleerkast',
   description: 'AI-powered wardrobe management and outfit recommendations',
+  applicationName: 'Kleerkast',
+  // Added to an iPad or iPhone home screen, the app opens full screen under this name.
+  appleWebApp: { capable: true, title: 'Kleerkast', statusBarStyle: 'default' },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -28,6 +31,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
+  themeColor: '#3A0F27',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
