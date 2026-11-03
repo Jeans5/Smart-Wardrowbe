@@ -1,0 +1,21 @@
+configuration:
+  gemini_api_key:
+    name: Gemini API-key
+    description: >-
+      Gratis key van https://aistudio.google.com/apikey. Zonder key start de app wel, maar
+      herkent ze geen kleding.
+  household_profiles:
+    name: Gezinsleden
+    description: >-
+      Namen gescheiden door komma's, bv. "Anna, Bram, Cas". Elke naam wordt een knop op het
+      aanmeldscherm.
+  app_url:
+    name: Adres van de app
+    description: >-
+      Het adres waarop de tablet de app opent, met het IP-adres van Home Assistant,
+      bv. http://192.168.0.10:3000.
+  ai_model:
+    name: AI-model
+    description: Gemini-model voor het herkennen van kleding en het maken van outfits.
+network:
+  3000/tcp: Webinterface (open dit op de tablet)

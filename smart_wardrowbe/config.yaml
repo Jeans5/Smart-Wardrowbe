@@ -1,0 +1,30 @@
+name: Smart Wardrowbe
+version: "0.1.0"
+slug: smart_wardrowbe
+description: AI-kleerkast met dagelijkse outfitvoorstellen voor het hele gezin
+url: https://github.com/Jeans5/Smart-Wardrowbe
+stage: experimental
+arch:
+  - amd64
+  - aarch64
+startup: application
+boot: auto
+# PostgreSQL runs inside the app, so a backup stops it first for a consistent copy.
+backup: cold
+timeout: 60
+ports:
+  3000/tcp: 3000
+ports_description:
+  3000/tcp: Webinterface (open dit op de tablet)
+webui: "http://[HOST]:[PORT:3000]"
+watchdog: "tcp://[HOST]:[PORT:3000]"
+options:
+  gemini_api_key: ""
+  household_profiles: ""
+  app_url: "http://homeassistant.local:3000"
+  ai_model: "gemini-flash-latest"
+schema:
+  gemini_api_key: password?
+  household_profiles: str?
+  app_url: url
+  ai_model: str

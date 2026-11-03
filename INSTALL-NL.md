@@ -3,6 +3,17 @@
 Deze versie van Wardrowbe heeft een Nederlandse vertaling, gebruikt gratis Google Gemini als AI en
 heeft een profielkiezer voor een gedeelde tablet: één tik op je naam en je zit in je eigen kast.
 
+## Op Home Assistant (OS)
+
+Heb je Home Assistant OS, dan installeer je Smart Wardrowbe als app:
+
+1. **Instellingen → Apps → Installeer een app**, rechtsboven **⋮ → Repositories**.
+2. Plak `https://github.com/Jeans5/Smart-Wardrowbe` en kies **Toevoegen**.
+3. Zoek **Smart Wardrowbe** in de lijst, open het en kies **Installeren**.
+4. Volg het tabblad **Documentatie** van de app.
+
+De rest van deze pagina is voor een gewone computer met Docker.
+
 ## Wat je nodig hebt
 
 - **Een computer die altijd aanstaat** in je thuisnetwerk (oude laptop, pc, Mac mini of NAS) met
