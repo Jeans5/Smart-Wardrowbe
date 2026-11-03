@@ -27,5 +27,10 @@ configuration:
     description: >-
       Gemini image model for product photos. If the name does not exist (any more), the app tries
       the known alternatives itself.
+  photo_resolution:
+    name: Product photo sharpness
+    description: >-
+      1K costs about $0.07 per photo. 2K shows the fabric and fine weaves more sharply and costs
+      about $0.10 per photo.
 network:
   3000/tcp: Web interface (open this on the tablet)

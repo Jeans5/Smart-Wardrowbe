@@ -107,9 +107,19 @@ class TestPrompt:
         assert "Do not add, remove, redesign or recolour anything" in prompt
 
     def test_other_colour_and_hint(self):
-        prompt = build_prompt((0, 0, 0), hint="navy wool blazer")
+        prompt = build_prompt((0, 0, 0), hint="- Item: blazer\n- Material: wool")
         assert "#000000" in prompt
-        assert prompt.endswith("The item is: navy wool blazer.")
+        assert prompt.endswith("the photo wins):\n- Item: blazer\n- Material: wool")
+
+    def test_fabric_gets_its_own_instructions(self):
+        prompt = build_prompt((255, 255, 255))
+        assert "The fabric matters most." in prompt
+        assert "weave or knit" in prompt
+        assert "does not remove the fabric's own texture" in prompt
+
+    def test_close_up_is_explained_only_when_sent(self):
+        assert "second image is a close-up" in build_prompt((255, 255, 255), close_up=True)
+        assert "second image" not in build_prompt((255, 255, 255))
 
 
 class TestExtractImage:
@@ -160,11 +170,15 @@ class TestGeminiProvider:
         assert request.headers["x-goog-api-key"] == "secret"
         assert "key=" not in str(request.url)  # never in the URL, which gets logged
         body = recorder.body()
-        text, image = body["contents"][0]["parts"]
-        assert "The item is: red shirt." in text["text"]
+        text, image, close_up = body["contents"][0]["parts"]
+        assert text["text"].endswith("\nred shirt")
+        assert "second image is a close-up" in text["text"]
         assert image["inlineData"]["mimeType"] == "image/jpeg"
         sent = Image.open(BytesIO(base64.b64decode(image["inlineData"]["data"])))
         assert max(sent.size) == bgr.INPUT_MAX_PX
+        crop = Image.open(BytesIO(base64.b64decode(close_up["inlineData"]["data"])))
+        # 30% of the 2000px short side, at the camera's own resolution.
+        assert crop.size == (600, 600)
         assert body["generationConfig"] == {
             "responseModalities": ["TEXT", "IMAGE"],
             "imageConfig": {"aspectRatio": "1:1", "imageSize": "1K"},
@@ -383,6 +397,26 @@ class TestImageServiceSource:
         assert service.analysis_source_path("a.jpg", "a_orig.jpg") == tmp_path / "a_orig.jpg"
 
 
+class TestFabricCloseUp:
+    def test_small_photos_get_none(self):
+        assert bgr.fabric_close_up(Image.new("RGB", (800, 1200))) is None
+
+    def test_crop_is_centred_and_sized(self):
+        image = Image.new("RGB", (2000, 3000), GREEN)
+        image.paste(RED, (900, 1400, 1100, 1600))
+        crop = bgr.fabric_close_up(image)
+        assert crop.size == (600, 600)
+        assert crop.getpixel((300, 300)) == RED
+        assert crop.getpixel((5, 5)) == GREEN
+
+    def test_small_photo_sends_no_close_up(self):
+        recorder = _Recorder((200, _image_response()))
+        _provider(recorder).generate(Image.new("RGB", (400, 600)))
+        parts = recorder.body()["contents"][0]["parts"]
+        assert len(parts) == 2
+        assert "second image" not in parts[0]["text"]
+
+
 class TestHint:
     def test_describes_the_item(self):
         item = ClothingItem(
@@ -392,7 +426,26 @@ class TestHint:
             pattern="solid",
             material="leather",
         )
-        assert bg_worker.product_photo_hint(item) == "white leather sneakers"
+        assert bg_worker.product_photo_hint(item) == (
+            "- Item: sneakers\n- Material: leather\n- Pattern: solid\n- Colours: white"
+        )
+
+    def test_adds_all_colours_and_the_description(self):
+        item = ClothingItem(
+            type="shirt",
+            primary_color="burgundy",
+            colors=["burgundy", "dark_red"],
+            ai_description="  Dit is een bordeauxrode\n overhemd met opstaande kraag. ",
+        )
+        assert bg_worker.product_photo_hint(item) == (
+            "- Item: shirt\n- Colours: burgundy, dark red\n"
+            "- Description: Dit is een bordeauxrode overhemd met opstaande kraag."
+        )
+
+    def test_long_description_is_cut(self):
+        item = ClothingItem(type="shirt", ai_description="x" * 1000)
+        line = bg_worker.product_photo_hint(item).splitlines()[-1]
+        assert len(line) == len("- Description: ") + bg_worker.HINT_DESCRIPTION_MAX
 
     def test_nothing_known_means_no_hint(self):
         assert bg_worker.product_photo_hint(ClothingItem(type="unknown")) is None
@@ -432,7 +485,7 @@ class TestImageJobAutoMode:
         assert refreshed.processing_kind is None
         assert refreshed.original_image_path is not None
         assert refreshed.ai_started_at == started
-        assert fake.hints == ["navy wool blazer"]
+        assert fake.hints == ["- Item: blazer\n- Material: wool\n- Colours: navy"]
 
     @pytest.mark.asyncio
     async def test_auto_failure_leaves_the_item_usable(self, db_session, test_user):

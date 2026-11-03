@@ -28,5 +28,10 @@ configuration:
     description: >-
       Gemini-beeldmodel voor de productfoto's. Bestaat de naam niet (meer), dan probeert de app
       zelf de bekende alternatieven.
+  photo_resolution:
+    name: Scherpte van productfoto's
+    description: >-
+      1K kost ongeveer € 0,06 per foto. 2K toont de stof en fijne weefsels scherper en kost
+      ongeveer € 0,09 per foto.
 network:
   3000/tcp: Webinterface (open dit op de tablet)

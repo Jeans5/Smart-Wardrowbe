@@ -116,26 +116,53 @@ MAX_ATTEMPTS = 3
 INPUT_MAX_PX = 1536
 # Below this much time left, a new attempt would only be killed by the deadline.
 MIN_ATTEMPT_SECONDS = 15
+# The fabric close-up: a centred square of this share of the photo's short side, sent at
+# up to CLOSE_UP_MAX_PX, and only for photos large enough to hold more detail than the whole.
+CLOSE_UP_FRACTION = 0.3
+CLOSE_UP_MIN_PX = 256
+CLOSE_UP_MAX_PX = 1024
+CLOSE_UP_MIN_SOURCE_PX = 900
 
 PRODUCT_PHOTO_PROMPT = """\
 Turn this photo into a clean, professional e-commerce product photo of the clothing item in it.
-
+{reference}
 Keep the item exactly as it is: the same garment, the same colours and shades, the same \
-pattern, print, texture and fabric, the same logos, labels, text, buttons, zips, pockets, \
-seams and details, the same cut, length and proportions. Do not add, remove, redesign or \
-recolour anything on the item, and do not invent details that are not visible.
+pattern and print, the same logos, labels, text, buttons, zips, pockets, seams and details, \
+the same cut, length and proportions. Do not add, remove, redesign or recolour anything on the \
+item, and do not invent details that are not visible.
+
+The fabric matters most. Reproduce the real material faithfully, as a close-up would show it:
+- the same weave or knit and its scale (for example oxford, twill, poplin, flannel, denim, \
+jersey, rib, cable knit, corduroy, linen slub, melange), with the visible surface texture and \
+fine structure; never smooth it into a flat, plasticky or printed-looking surface;
+- the same thickness, weight and stiffness, so it drapes, folds and holds its shape like this \
+fabric does: a crisp poplin stays crisp, a soft knit stays soft, a heavy wool stays heavy;
+- the same sheen: matte stays matte, satin or silk keeps its soft shine, leather and suede \
+keep their grain and nap;
+- the same fibre look, such as heathered or two-tone yarns, brushed or fuzzy surfaces, and \
+small irregularities that belong to the fabric;
+- the true colour of the fabric under neutral daylight: remove colour casts from the room's \
+lighting, but do not change the hue, saturation or darkness of the fabric itself.
 
 Make it look brand new: neatly pressed and ironed, wrinkle-free, smooth and symmetrical, \
-laid out or shaped the way a web shop would show it. Clothes as a neat flat lay seen from \
-straight above, or on an invisible ghost mannequin when that suits the garment better; \
-shoes, bags and accessories as a product shot at a slight angle.
+laid out or shaped the way a web shop would show it. Ironing removes creases and folds; it \
+does not remove the fabric's own texture. Clothes as a neat flat lay seen from straight \
+above, or on an invisible ghost mannequin when that suits the garment better; shoes, bags \
+and accessories as a product shot at a slight angle.
 
 Show only the item: no person, no hands, no hanger, no mannequin, no props, no other \
 clothes, no text, no watermark. Centre the whole item in the frame with a small even margin \
 and do not crop any part of it.
 
 Background: a plain, seamless, solid {background} background filling the whole image, with \
-soft, even studio lighting and only a very subtle natural shadow under the item.\
+soft, even studio lighting that shows the fabric's texture, and only a very subtle natural \
+shadow under the item.\
+"""
+
+CLOSE_UP_REFERENCE = """
+The first image is the whole item. The second image is a close-up crop of the same photo, \
+showing its fabric at full detail: use it as the reference for the texture, weave, sheen and \
+colour of the material, and make the fabric in the product photo match it.
 """
 
 
@@ -146,22 +173,55 @@ def _background_phrase(bg_color: tuple[int, int, int]) -> str:
     return f"colour {hex_color}"
 
 
-def build_prompt(bg_color: tuple[int, int, int], hint: str | None = None) -> str:
-    prompt = PRODUCT_PHOTO_PROMPT.format(background=_background_phrase(bg_color))
+def build_prompt(
+    bg_color: tuple[int, int, int], hint: str | None = None, close_up: bool = False
+) -> str:
+    prompt = PRODUCT_PHOTO_PROMPT.format(
+        background=_background_phrase(bg_color),
+        reference=CLOSE_UP_REFERENCE if close_up else "",
+    )
     if hint:
-        prompt += f"\n\nThe item is: {hint}."
+        prompt += (
+            "\n\nWhat an earlier analysis of the photo found (a guide only; where it and the "
+            f"photo disagree, the photo wins):\n{hint}"
+        )
     return prompt
 
 
-def _encode_input(image: Image.Image) -> str:
+def _upright_rgb(image: Image.Image) -> Image.Image:
     image = ImageOps.exif_transpose(image) or image
     if image.mode != "RGB":
         image = image.convert("RGB")
+    return image
+
+
+def _jpeg_b64(image: Image.Image, max_px: int, quality: int = 90) -> str:
     image = image.copy()
-    image.thumbnail((INPUT_MAX_PX, INPUT_MAX_PX), Image.Resampling.LANCZOS)
+    image.thumbnail((max_px, max_px), Image.Resampling.LANCZOS)
     buf = BytesIO()
-    image.save(buf, format="JPEG", quality=90)
+    image.save(buf, format="JPEG", quality=quality)
     return base64.b64encode(buf.getvalue()).decode("ascii")
+
+
+def _encode_input(image: Image.Image) -> str:
+    return _jpeg_b64(_upright_rgb(image), INPUT_MAX_PX)
+
+
+def fabric_close_up(image: Image.Image) -> Image.Image | None:
+    """A full-resolution crop from the middle of the photo, where the garment usually is.
+
+    The whole photo reaches the model at about 1.5K, which blurs a fine weave into a flat
+    colour; this crop shows the same fabric at the camera's own detail. None when the photo
+    is too small for a crop to show more than the whole picture already does.
+    """
+    image = _upright_rgb(image)
+    short_side = min(image.size)
+    if short_side < CLOSE_UP_MIN_SOURCE_PX:
+        return None
+    side = max(CLOSE_UP_MIN_PX, int(short_side * CLOSE_UP_FRACTION))
+    left = (image.width - side) // 2
+    top = (image.height - side) // 2
+    return image.crop((left, top, left + side, top + side))
 
 
 def _google_error_message(response: httpx.Response) -> str:
@@ -265,10 +325,20 @@ class GeminiProductPhotoProvider(BackgroundRemovalProvider):
         hint: str | None = None,
     ) -> Image.Image:
         deadline = time.monotonic() + self.total_budget
-        body_parts = [
-            {"text": build_prompt(bg_color, hint)},
+        close_up = fabric_close_up(image)
+        body_parts: list[dict[str, Any]] = [
+            {"text": build_prompt(bg_color, hint, close_up=close_up is not None)},
             {"inlineData": {"mimeType": "image/jpeg", "data": _encode_input(image)}},
         ]
+        if close_up is not None:
+            body_parts.append(
+                {
+                    "inlineData": {
+                        "mimeType": "image/jpeg",
+                        "data": _jpeg_b64(close_up, CLOSE_UP_MAX_PX, quality=92),
+                    }
+                }
+            )
 
         attempt = 0
         last_error: ProductPhotoError | None = None

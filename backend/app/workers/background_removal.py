@@ -15,26 +15,39 @@ from app.workers.queues import IMAGE_QUEUE
 logger = logging.getLogger(__name__)
 
 PRODUCT_PHOTO_BG_COLOR = "#FFFFFF"
+HINT_DESCRIPTION_MAX = 400
+
+
+def _label(value: str | None) -> str | None:
+    if not value or value == "unknown":
+        return None
+    return value.replace("_", " ").replace("-", " ")
 
 
 def product_photo_hint(item: ClothingItem) -> str | None:
-    """A short description of the item from its tags, to steer the redraw.
+    """What tagging already saw of the item, to steer the redraw - above all its fabric.
 
-    Only what tagging already saw, so it can tell the model "these are shoes" without
-    inventing anything the photo does not show.
+    Only facts from the analysis or the person's own edits, so it can tell the model
+    "this is cotton, these are shoes" without inventing anything the photo does not show.
     """
-    words: list[str] = []
-    if item.primary_color and item.primary_color != "unknown":
-        words.append(item.primary_color.replace("_", " "))
-    if item.pattern and item.pattern not in ("solid", "unknown"):
-        words.append(item.pattern.replace("_", " "))
-    if item.material and item.material != "unknown":
-        words.append(item.material.replace("_", " "))
-    kind = item.subtype or item.type
-    if not kind or kind == "unknown":
+    kind = _label(item.subtype) or _label(item.type)
+    if not kind:
         return None
-    words.append(kind.replace("_", " ").replace("-", " "))
-    return " ".join(words)
+    lines = [f"- Item: {kind}"]
+    if material := _label(item.material):
+        lines.append(f"- Material: {material}")
+    if pattern := _label(item.pattern):
+        lines.append(f"- Pattern: {pattern}")
+    colours = [_label(c) for c in [item.primary_color, *(item.colors or [])]]
+    colours = list(dict.fromkeys(c for c in colours if c))
+    if colours:
+        lines.append(f"- Colours: {', '.join(colours)}")
+    if item.ai_description:
+        description = " ".join(item.ai_description.split())
+        if len(description) > HINT_DESCRIPTION_MAX:
+            description = description[: HINT_DESCRIPTION_MAX - 1].rstrip() + "…"
+        lines.append(f"- Description: {description}")
+    return "\n".join(lines)
 
 
 def _parse_started_at(value: str | None) -> datetime | None:

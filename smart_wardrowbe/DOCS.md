@@ -39,6 +39,10 @@ herkend heeft; in de kast staat dan even *Productfoto maken…*.
   zien. Met de toverstaf maak je opnieuw een productfoto, altijd vanaf het origineel.
 - **Mislukt het?** Dan houdt het stuk gewoon je eigen foto en blijft het bruikbaar in outfits.
   Probeer het later opnieuw met de toverstaf; de reden staat in het **Logboek**.
+- **Stof:** de AI krijgt naast je foto ook een close-up van de stof mee, en moet weefsel,
+  dikte, glans en kleur daarvan overnemen. Wil je het nog scherper, zet dan *Scherpte van
+  productfoto's* op **2K** (ongeveer € 0,09 per foto). Een scherpe foto bij daglicht helpt het
+  meest: wat de camera niet ziet, kan de AI niet natekenen.
 - **Uitzetten:** zet *Automatische productfoto's* uit op het tabblad **Configuratie**. De
   toverstaf blijft dan werken per stuk.
 - Het is een AI-tekening van je foto, geen echte foto. Kijk bij een stuk met veel details of

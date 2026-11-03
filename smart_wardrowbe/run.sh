@@ -27,6 +27,8 @@ AI_MODEL="$(option ai_model)"
 AI_MODEL="${AI_MODEL:-gemini-flash-latest}"
 PHOTO_MODEL="$(option photo_model)"
 PHOTO_MODEL="${PHOTO_MODEL:-gemini-3.1-flash-image-preview}"
+PHOTO_RESOLUTION="$(option photo_resolution)"
+PHOTO_RESOLUTION="${PHOTO_RESOLUTION:-1K}"
 # Not option(): its "// empty" turns a false into nothing, which would read as the default.
 PRODUCT_PHOTOS="$(jq -r 'if has("product_photos") then .product_photos else true end' "$OPTIONS" 2>/dev/null || echo true)"
 
@@ -122,6 +124,8 @@ if [ -n "$GEMINI_API_KEY" ]; then
   # white. It replaces the local rembg cut-out, and the original photo is always kept.
   export BG_REMOVAL_PROVIDER=gemini
   export PRODUCT_PHOTO_MODEL="$PHOTO_MODEL"
+  # 2K shows a fine weave more sharply, at about half again the price per photo.
+  export PRODUCT_PHOTO_IMAGE_SIZE="$PHOTO_RESOLUTION"
   if [ "$PRODUCT_PHOTOS" = "false" ]; then
     export PRODUCT_PHOTO_AUTO=false
     log "Automatic product photos are off; the product photo button still works per item"

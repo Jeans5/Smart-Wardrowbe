@@ -1,5 +1,5 @@
 name: Smart Wardrowbe
-version: "0.1.5"
+version: "0.1.6"
 slug: smart_wardrowbe
 description: AI-kleerkast met dagelijkse outfitvoorstellen voor het hele gezin
 url: https://github.com/Jeans5/Smart-Wardrowbe
@@ -25,6 +25,7 @@ options:
   ai_model: "gemini-flash-latest"
   product_photos: true
   photo_model: "gemini-3.1-flash-image-preview"
+  photo_resolution: "1K"
 schema:
   gemini_api_key: password?
   household_profiles: str?
@@ -32,3 +33,4 @@ schema:
   ai_model: str
   product_photos: bool
   photo_model: str
+  photo_resolution: list(1K|2K)
