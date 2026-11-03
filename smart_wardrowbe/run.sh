@@ -102,7 +102,9 @@ export STORAGE_PATH=/data/wardrobe
 export APP_URL
 export LOG_LEVEL=INFO
 export AI_TAGGING_CONCURRENCY=1
-export AI_REASONING_EFFORT=none
+# Gemini 3 models cannot switch thinking off and answer "none" with a 400; "low" keeps
+# replies fast and is accepted by every current Gemini model.
+export AI_REASONING_EFFORT=low
 export MAX_IMAGE_MEGAPIXELS=50
 export IMAGE_WORKER_CONCURRENCY=1
 export BG_REMOVAL_PROVIDER=rembg
