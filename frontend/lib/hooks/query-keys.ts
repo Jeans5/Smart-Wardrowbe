@@ -19,6 +19,7 @@ const WEAR_HISTORY = ['wear-history'] as const;
 
 export const queryKeys = {
   authConfig: ['auth-config'] as const,
+  householdProfiles: ['household-profiles'] as const,
   authUser: ['auth-user'] as const,
   userProfile: ['user-profile'] as const,
   features: ['features'] as const,

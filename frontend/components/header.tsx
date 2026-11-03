@@ -1,12 +1,13 @@
 'use client';
 
-import { Menu, Moon, Sun, LogOut } from 'lucide-react';
+import { Menu, Moon, Sun, LogOut, UsersRound } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { signOut } from 'next-auth/react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/hooks/use-auth';
 import { useAuthConfig } from '@/lib/hooks/use-auth-config';
+import { useHouseholdProfiles } from '@/lib/hooks/use-household-profiles';
 import { useTranslations } from 'next-intl';
 import { LocaleSwitcher } from '@/components/locale-switcher';
 
@@ -18,6 +19,9 @@ export function Header({ onMenuClick }: HeaderProps) {
   const { user } = useAuth();
   const { theme, setTheme } = useTheme();
   const authConfig = useAuthConfig();
+  const household = useHouseholdProfiles();
+  // On a shared household tablet signing out is how people switch, so the button says so.
+  const switchMode = (household.data?.length ?? 0) > 0;
   const t = useTranslations('nav');
 
   const toggleTheme = () => {
@@ -85,14 +89,21 @@ export function Header({ onMenuClick }: HeaderProps) {
             <span className="hidden text-sm font-semibold lg:block">
               {user?.display_name || t('userFallback')}
             </span>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleLogout}
-              aria-label={t('signOut')}
-            >
-              <LogOut className="h-5 w-5" />
-            </Button>
+            {switchMode ? (
+              <Button variant="outline" onClick={handleLogout} aria-label={t('switchProfile')}>
+                <UsersRound className="h-5 w-5" />
+                <span className="ml-2 hidden sm:inline">{t('switchProfile')}</span>
+              </Button>
+            ) : (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={handleLogout}
+                aria-label={t('signOut')}
+              >
+                <LogOut className="h-5 w-5" />
+              </Button>
+            )}
           </div>
         </div>
       </div>

@@ -13,6 +13,8 @@ import {
   FORWARD_AUTH_USERNAME_CONFLICT,
 } from '@/lib/auth-errors';
 import { useAuthConfig } from '@/lib/hooks/use-auth-config';
+import { useHouseholdProfiles } from '@/lib/hooks/use-household-profiles';
+import type { HouseholdProfile } from '@/lib/household';
 
 function OIDCLoginButton({ getCallbackUrl }: { getCallbackUrl: () => string }) {
   const t = useTranslations('auth');
@@ -30,11 +32,103 @@ function OIDCLoginButton({ getCallbackUrl }: { getCallbackUrl: () => string }) {
   );
 }
 
+const PROFILE_COLORS = [
+  'bg-rose-500',
+  'bg-sky-500',
+  'bg-amber-500',
+  'bg-emerald-500',
+  'bg-violet-500',
+  'bg-teal-500',
+] as const;
+
+function profileInitial(name: string) {
+  return Array.from(name.trim())[0]?.toUpperCase() ?? '';
+}
+
+function ProfilePicker({
+  profiles,
+  getCallbackUrl,
+  onOtherAccount,
+}: {
+  profiles: HouseholdProfile[];
+  getCallbackUrl: () => string;
+  onOtherAccount: () => void;
+}) {
+  const [pendingEmail, setPendingEmail] = useState<string | null>(null);
+  const t = useTranslations('auth');
+
+  const choose = async (profile: HouseholdProfile) => {
+    setPendingEmail(profile.email);
+    await signIn('dev-credentials', {
+      email: profile.email,
+      name: profile.name,
+      callbackUrl: getCallbackUrl(),
+    });
+  };
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-center text-xl font-semibold">{t('household.title')}</h2>
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+        {profiles.map((profile, index) => (
+          <button
+            key={profile.email}
+            type="button"
+            onClick={() => choose(profile)}
+            disabled={pendingEmail !== null}
+            aria-label={t('household.signInAs', { name: profile.name })}
+            className="flex flex-col items-center gap-3 rounded-xl border bg-card p-5 transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60"
+          >
+            <span
+              aria-hidden="true"
+              className={`flex h-20 w-20 items-center justify-center rounded-full text-3xl font-semibold text-white ${PROFILE_COLORS[index % PROFILE_COLORS.length]}`}
+            >
+              {pendingEmail === profile.email ? (
+                <Loader2 className="h-8 w-8 animate-spin" />
+              ) : (
+                profileInitial(profile.name)
+              )}
+            </span>
+            <span className="text-lg font-medium">{profile.name}</span>
+          </button>
+        ))}
+      </div>
+      <button
+        type="button"
+        onClick={onOtherAccount}
+        className="block w-full text-center text-sm text-muted-foreground underline-offset-4 hover:underline"
+      >
+        {t('household.otherAccount')}
+      </button>
+    </div>
+  );
+}
+
 function DevLogin({ getCallbackUrl }: { getCallbackUrl: () => string }) {
+  const household = useHouseholdProfiles();
+  const [showForm, setShowForm] = useState(false);
   const [email, setEmail] = useState('dev@wardrobe.local');
   const [name, setName] = useState('Dev User');
   const [isLoading, setIsLoading] = useState(false);
   const t = useTranslations('auth');
+
+  const profiles = household.data ?? [];
+  if (household.isPending) {
+    return (
+      <div className="space-y-4 animate-pulse">
+        <div className="h-12 bg-muted rounded-md" />
+      </div>
+    );
+  }
+  if (profiles.length > 0 && !showForm) {
+    return (
+      <ProfilePicker
+        profiles={profiles}
+        getCallbackUrl={getCallbackUrl}
+        onOtherAccount={() => setShowForm(true)}
+      />
+    );
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

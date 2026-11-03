@@ -216,6 +216,44 @@ describe('login page without forward-auth', () => {
     expect(auth.signIn).toHaveBeenCalledWith('oidc', { callbackUrl: '/dashboard' })
   })
 
+  it('shows household profiles as one-tap sign-ins in dev mode', async () => {
+    auth.getProviders.mockResolvedValue({
+      'dev-credentials': { id: 'dev-credentials', type: 'credentials' },
+    })
+    mockBackend({ forward_auth: false })
+    const backendFetch = global.fetch
+    global.fetch = vi.fn((input: RequestInfo | URL, init?: RequestInit) =>
+      String(input) === '/api/household'
+        ? Promise.resolve(
+            new Response(
+              JSON.stringify({
+                profiles: [
+                  { name: 'Levi', email: 'levi@home.arpa' },
+                  { name: 'Julie', email: 'julie@home.arpa' },
+                ],
+              }),
+              { status: 200 }
+            )
+          )
+        : backendFetch(input, init)
+    ) as unknown as typeof fetch
+
+    renderLogin()
+
+    const tiles = await screen.findAllByRole('button', { name: 'household.signInAs' })
+    expect(tiles).toHaveLength(2)
+    expect(screen.getByText('Julie')).toBeInTheDocument()
+    fireEvent.click(tiles[0])
+    expect(auth.signIn).toHaveBeenCalledWith('dev-credentials', {
+      email: 'levi@home.arpa',
+      name: 'Levi',
+      callbackUrl: '/dashboard',
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'household.otherAccount' }))
+    expect(await screen.findByText('devMode')).toBeInTheDocument()
+  })
+
   it('keeps the dev login form and never calls the proxy provider', async () => {
     auth.getProviders.mockResolvedValue({
       'forward-auth': { id: 'forward-auth', type: 'credentials' },

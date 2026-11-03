@@ -26,3 +26,6 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    environment:
+      # One-tap profile picker on the login page (see HOUSEHOLD_PROFILES in .env.example).
+      HOUSEHOLD_PROFILES: ${HOUSEHOLD_PROFILES:-}

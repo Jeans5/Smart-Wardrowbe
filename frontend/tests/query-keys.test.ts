@@ -10,6 +10,7 @@ describe('queryKeys equal the literal keys they replaced', () => {
 
   it.each([
     ['authConfig', queryKeys.authConfig, ['auth-config']],
+    ['householdProfiles', queryKeys.householdProfiles, ['household-profiles']],
     ['authUser', queryKeys.authUser, ['auth-user']],
     ['userProfile', queryKeys.userProfile, ['user-profile']],
     ['features', queryKeys.features, ['features']],
