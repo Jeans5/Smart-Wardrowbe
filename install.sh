@@ -99,7 +99,7 @@ else
   fi
 
   if [ -n "$gemini_key" ]; then
-    set_env AI_BASE_URL "https://generativelanguage.googleapis.com/v1beta/openai/"
+    set_env AI_BASE_URL "https://generativelanguage.googleapis.com/v1beta/openai"
     set_env AI_API_KEY "$gemini_key"
     set_env AI_VISION_MODEL "gemini-flash-latest"
     set_env AI_TEXT_MODEL "gemini-flash-latest"

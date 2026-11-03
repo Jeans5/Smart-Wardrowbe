@@ -108,7 +108,7 @@ export IMAGE_WORKER_CONCURRENCY=1
 export BG_REMOVAL_PROVIDER=rembg
 export BG_REMOVAL_MODEL=u2net
 if [ -n "$GEMINI_API_KEY" ]; then
-  export AI_BASE_URL="https://generativelanguage.googleapis.com/v1beta/openai/"
+  export AI_BASE_URL="https://generativelanguage.googleapis.com/v1beta/openai"
   export AI_API_KEY="$GEMINI_API_KEY"
   export AI_VISION_MODEL="$AI_MODEL"
   export AI_TEXT_MODEL="$AI_MODEL"
