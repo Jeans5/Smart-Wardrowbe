@@ -58,13 +58,19 @@ from app.schemas.item import (
     TaggingProgressResponse,
     WashHistoryResponse,
 )
+from app.services.background_removal import ProductPhotoError
 from app.services.image_service import ImageService
 from app.services.item_service import ItemService, TagVocabularyError
 from app.utils.auth import get_current_user
 from app.utils.signed_urls import sign_optional
 from app.utils.timezone import get_user_today
 from app.utils.uploads import UploadTooLargeError, read_upload_within_limit
-from app.workers.queues import IMAGE_QUEUE, TAGGING_QUEUE, queue_for_kind
+from app.workers.background_removal import (
+    enqueue_product_photo,
+    product_photo_hint,
+    wants_auto_product_photo,
+)
+from app.workers.queues import IMAGE_PROCESSING_KINDS, IMAGE_QUEUE, TAGGING_QUEUE, queue_for_kind
 from app.workers.settings import get_redis_settings
 
 logger = logging.getLogger(__name__)
@@ -275,6 +281,7 @@ async def create_item(
                     "tag_item_image",
                     str(item.id),
                     full_image_path,
+                    product_photo=True,
                     _queue_name=TAGGING_QUEUE,
                 )
                 item.ai_job_id = job.job_id
@@ -446,6 +453,7 @@ async def bulk_create_items(
                             "tag_item_image",
                             str(item.id),
                             full_image_path,
+                            product_photo=True,
                             _queue_name=TAGGING_QUEUE,
                         )
                         item.ai_job_id = job.job_id
@@ -699,7 +707,9 @@ async def bulk_analyze_items(
     try:
         for item, job_id in to_enqueue:
             try:
-                full_image_path = str(image_service.get_image_path(item.image_path))
+                full_image_path = str(
+                    image_service.analysis_source_path(item.image_path, item.original_image_path)
+                )
                 job = await redis.enqueue_job(
                     "tag_item_image",
                     str(item.id),
@@ -1213,14 +1223,25 @@ async def get_tagging_progress(
     batch_completed = 0
     batch_failed = 0
     if anchor is not None:
+        # Not _tagging_scope: an item that finished tagging and is now getting its
+        # automatic product photo is processing_kind=background_removal for a while,
+        # and dropping it would make the run's total shrink and grow again. Being
+        # tagged at or after the anchor is what makes it part of this run.
         batch_row = await db.execute(
             select(
                 func.count().filter(ClothingItem.ai_completed_at >= anchor),
                 func.count().filter(
                     ClothingItem.status == ItemStatus.error,
                     ClothingItem.ai_failed_at >= anchor,
+                    ClothingItem.processing_kind.is_distinct_from(
+                        ProcessingKind.background_removal
+                    ),
+                    ClothingItem.processing_kind.is_distinct_from(ProcessingKind.rotate),
                 ),
-            ).where(*_tagging_scope(current_user.id))
+            ).where(
+                ClothingItem.user_id == current_user.id,
+                ClothingItem.is_archived.is_(False),
+            )
         )
         batch_completed, batch_failed = batch_row.one()
 
@@ -1571,6 +1592,7 @@ async def trigger_ai_analysis(
         # branch above - every other status keeps the unconditional enqueue below
         # untouched.
         image_path = item.image_path
+        original_image_path = item.original_image_path
         job_id, retry_after_seconds = await item_service.claim_error_item_for_retry(
             item.id, settings.ai_retry_cooldown_seconds
         )
@@ -1589,7 +1611,9 @@ async def trigger_ai_analysis(
         try:
             redis = await create_pool(get_redis_settings())
             try:
-                full_image_path = str(image_service.get_image_path(image_path))
+                full_image_path = str(
+                    image_service.analysis_source_path(image_path, original_image_path)
+                )
                 enqueued = await redis.enqueue_job(
                     "tag_item_image",
                     str(item_id),
@@ -1620,7 +1644,9 @@ async def trigger_ai_analysis(
 
         redis = await create_pool(get_redis_settings())
         try:
-            full_image_path = str(image_service.get_image_path(item.image_path))
+            full_image_path = str(
+                image_service.analysis_source_path(item.image_path, item.original_image_path)
+            )
             job = await redis.enqueue_job(
                 "tag_item_image",
                 str(item.id),
@@ -1799,7 +1825,9 @@ async def remove_item_background(
 
     try:
         image_service = ImageService()
-        result = await asyncio.to_thread(image_service.remove_background, item.image_path, bg_color)
+        result = await asyncio.to_thread(
+            image_service.remove_background, item.image_path, bg_color, product_photo_hint(item)
+        )
         item.original_image_path = result["original_backup_path"]
         if recovering_from_error:
             item.status = ItemStatus.ready
@@ -1823,6 +1851,12 @@ async def remove_item_background(
             detail="Background removal provider not available. "
             "For rembg: pip install rembg[cpu]. "
             "For HTTP provider: set BG_REMOVAL_PROVIDER=http and BG_REMOVAL_URL.",
+        ) from None
+    except ProductPhotoError as e:
+        logger.warning(f"Product photo failed for item {item.id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail=str(e),
         ) from None
     except ValueError as e:
         raise HTTPException(
@@ -1897,6 +1931,18 @@ async def replace_item_image(
             detail="Item not found",
         )
 
+    if (
+        item.status == ItemStatus.processing
+        and item.ai_job_id
+        and item.processing_kind in IMAGE_PROCESSING_KINDS
+    ):
+        # A running image job writes to the current files and would land its result
+        # on paths this request is about to delete.
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Item has a background job in progress",
+        )
+
     image_service = ImageService()
     content = await _read_image_or_413(image)
     content_type = image.content_type or "application/octet-stream"
@@ -1947,6 +1993,33 @@ async def replace_item_image(
     # Old files are removed only after the new paths are committed, so a failed
     # commit cannot leave the item pointing at deleted files
     image_service.delete_images(old_paths)
+
+    # A replaced photo is a new photo too, so it gets the same automatic product photo
+    # as an upload - but only for an item at rest, never one a tagging job still owns.
+    if (
+        item.status == ItemStatus.ready
+        and item.processing_kind is None
+        and wants_auto_product_photo(item)
+    ):
+        redis = None
+        try:
+            redis = await create_pool(get_redis_settings())
+            await enqueue_product_photo(redis, db, item)
+        except Exception as e:
+            logger.error(f"Failed to queue product photo for replaced image of {item.id}: {e}")
+        finally:
+            if redis is not None:
+                await redis.aclose()
+        await db.refresh(
+            item,
+            attribute_names=[
+                "status",
+                "processing_kind",
+                "ai_started_at",
+                "ai_job_id",
+                "updated_at",
+            ],
+        )
 
     return ItemResponse.model_validate(item)
 

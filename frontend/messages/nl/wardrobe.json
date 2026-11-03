@@ -88,7 +88,10 @@
     "retryCooldown": "{seconds, plural, one {Opnieuw proberen kan over # seconde} other {Opnieuw proberen kan over # seconden}}",
     "rotateFailed": "Draaien mislukt",
     "rotateQueued": "In de wachtrij om te draaien",
-    "rotating": "Draaien…"
+    "rotating": "Draaien…",
+    "makingProductPhotoElapsed": "Productfoto maken… {elapsed}",
+    "productPhotoFailed": "Productfoto mislukt",
+    "productPhotoQueued": "In de wachtrij voor een productfoto"
   },
   "allTypes": "Alle soorten",
   "bulkActions": {
@@ -113,7 +116,12 @@
     "rotateError": "Draaien in de wachtrij zetten mislukt",
     "rotatePartialFailed": "{count, plural, one {# stuk in de wachtrij zetten om te draaien mislukt} other {# stuks in de wachtrij zetten om te draaien mislukt}}",
     "rotateQueued": "{count, plural, one {# stuk in de wachtrij gezet om te draaien} other {# stuks in de wachtrij gezet om te draaien}}",
-    "rotateSkipped": "{count, plural, one {# stuk overgeslagen (wordt al verwerkt)} other {# stuks overgeslagen (worden al verwerkt)}}"
+    "rotateSkipped": "{count, plural, one {# stuk overgeslagen (wordt al verwerkt)} other {# stuks overgeslagen (worden al verwerkt)}}",
+    "productPhotoAlreadyDone": "{count, plural, one {# stuk heeft al een productfoto} other {# stuks hebben al een productfoto}}",
+    "productPhotoConfirmDescription": "De AI tekent {count, plural, one {# geselecteerd stuk} other {# geselecteerde stuks}} opnieuw als gestreken productfoto op een witte achtergrond. Met Gemini kost dat enkele centen per foto. De originele foto blijft bewaard en kun je achteraf per stuk terugzetten.",
+    "productPhotoConfirmTitle": "Productfoto maken van {count, plural, one {# stuk} other {# stuks}}?",
+    "productPhotoError": "Productfoto's in de wachtrij zetten mislukt",
+    "productPhotoQueued": "{count, plural, one {# stuk in de wachtrij gezet voor een productfoto} other {# stuks in de wachtrij gezet voor een productfoto}}"
   },
   "bulkDelete": {
     "confirmDescription": "Dit verwijdert de geselecteerde stuks en hun afbeeldingen definitief. Je kunt dit niet ongedaan maken.",
@@ -174,7 +182,9 @@
       "logWear": "Gedragen registreren",
       "wearLogged": "Gedragen geregistreerd",
       "wearLogError": "Gedragen registreren mislukt",
-      "washed": "Stuk als gewassen gemarkeerd"
+      "washed": "Stuk als gewassen gemarkeerd",
+      "productPhotoError": "Productfoto maken mislukt",
+      "productPhotoMade": "Productfoto gemaakt"
     },
     "brand": "Merk",
     "name": "Naam",
@@ -215,7 +225,9 @@
       "setAsPrimary": "Als hoofdafbeelding instellen",
       "suggestOutfit": "Outfit maken met dit stuk",
       "toggleFavorite": "Favoriet aan/uit",
-      "undoBackgroundRemoval": "Achtergrond terugzetten"
+      "undoBackgroundRemoval": "Achtergrond terugzetten",
+      "makeProductPhoto": "Productfoto maken",
+      "undoProductPhoto": "Terug naar de originele foto"
     },
     "type": "Soort",
     "unrecognizedType": "AI herkende “{value}”, maar dat is geen ondersteunde soort. Kies hieronder de soort die het dichtst in de buurt komt; je kunt “{value}” als subtype houden.",

@@ -14,7 +14,8 @@
     "removeBackground": "Achtergrond verwijderen",
     "rotateCcw": "Links draaien",
     "rotateCw": "Rechts draaien",
-    "selectAllMatching": "Alle {count} resultaten selecteren"
+    "selectAllMatching": "Alle {count} resultaten selecteren",
+    "makeProductPhoto": "Productfoto maken"
   },
   "cancel": "Annuleren",
   "change": "Wijzigen",

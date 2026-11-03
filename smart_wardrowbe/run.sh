@@ -25,6 +25,10 @@ APP_URL="${APP_URL%/}"
 APP_URL="${APP_URL:-http://homeassistant.local:3000}"
 AI_MODEL="$(option ai_model)"
 AI_MODEL="${AI_MODEL:-gemini-flash-latest}"
+PHOTO_MODEL="$(option photo_model)"
+PHOTO_MODEL="${PHOTO_MODEL:-gemini-3.1-flash-image-preview}"
+# Not option(): its "// empty" turns a false into nothing, which would read as the default.
+PRODUCT_PHOTOS="$(jq -r 'if has("product_photos") then .product_photos else true end' "$OPTIONS" 2>/dev/null || echo true)"
 
 mkdir -p /data/wardrobe /data/uploads /data/redis "$PG_SOCKET"
 
@@ -114,6 +118,16 @@ if [ -n "$GEMINI_API_KEY" ]; then
   export AI_API_KEY="$GEMINI_API_KEY"
   export AI_VISION_MODEL="$AI_MODEL"
   export AI_TEXT_MODEL="$AI_MODEL"
+  # Product photos: Gemini's image model redraws each photo as a pressed catalogue shot on
+  # white. It replaces the local rembg cut-out, and the original photo is always kept.
+  export BG_REMOVAL_PROVIDER=gemini
+  export PRODUCT_PHOTO_MODEL="$PHOTO_MODEL"
+  if [ "$PRODUCT_PHOTOS" = "false" ]; then
+    export PRODUCT_PHOTO_AUTO=false
+    log "Automatic product photos are off; the product photo button still works per item"
+  else
+    export PRODUCT_PHOTO_AUTO=true
+  fi
 else
   log "No Gemini API key set: the app starts, but clothes are not recognised until you add one"
   export AI_INTERNAL_ENABLED=false

@@ -166,10 +166,39 @@ class Settings(BaseSettings):
     max_bulk_action_count: int = Field(default=200, ge=1)
 
     # Background removal
-    bg_removal_provider: str = Field(default="rembg")  # "rembg" or "http"
+    bg_removal_provider: str = Field(default="rembg")  # "rembg", "http" or "gemini"
     bg_removal_model: str = Field(default="u2net")  # rembg model name
     bg_removal_url: str | None = Field(default=None)  # URL for http provider (e.g. withoutbg)
     bg_removal_api_key: str | None = Field(default=None)  # API key for http provider
+
+    # Product photo (BG_REMOVAL_PROVIDER=gemini): a Gemini image model redraws the item as a
+    # clean catalogue photo on white instead of cutting its background out. Image output is a
+    # paid Gemini feature, so it needs a key from a project with billing enabled.
+    # Google has shipped this model under several ids (preview, GA, older 2.5); the provider
+    # falls back through the known ones when the configured id answers 404.
+    product_photo_model: str = Field(default="gemini-3.1-flash-image-preview")
+    product_photo_api_key: str | None = Field(default=None)  # falls back to AI_API_KEY
+    product_photo_base_url: str = Field(default="https://generativelanguage.googleapis.com/v1beta")
+    product_photo_image_size: str = Field(default="1K")
+    # Square, because the wardrobe grid crops every photo to a square.
+    product_photo_aspect_ratio: str = Field(default="1:1")
+    # Run automatically for every new photo (new item, or a replaced photo).
+    product_photo_auto: bool = Field(default=True)
+    # Per request; all attempts together are also capped below image_job_timeout.
+    product_photo_timeout: int = Field(default=90, ge=10)
+
+    @field_validator("product_photo_base_url")
+    @classmethod
+    def strip_product_photo_base_url(cls, v: str) -> str:
+        return v.strip().rstrip("/")
+
+    @property
+    def product_photo_enabled(self) -> bool:
+        return self.bg_removal_provider == "gemini"
+
+    @property
+    def product_photo_auto_enabled(self) -> bool:
+        return self.product_photo_enabled and self.product_photo_auto
 
     @property
     def effective_ai_vision_enabled(self) -> bool:

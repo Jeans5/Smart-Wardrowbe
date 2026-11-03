@@ -1,6 +1,6 @@
 'use client';
 
-import { X, Trash2, RefreshCw, Loader2, CheckSquare, Square, MinusSquare, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, RotateCcw, RotateCw, Eraser } from 'lucide-react';
+import { X, Trash2, RefreshCw, Loader2, CheckSquare, Square, MinusSquare, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, RotateCcw, RotateCw, Eraser, Wand2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   AlertDialog,
@@ -38,6 +38,8 @@ interface BulkActionToolbarProps {
   isReanalyzing?: boolean;
   isRotating?: boolean;
   isRemovingBackground?: boolean;
+  // The background action redraws a product photo instead of cutting the background out.
+  productPhoto?: boolean;
   variant?: BulkDeleteVariant;
   pagination?: BulkToolbarPagination;
 }
@@ -63,6 +65,7 @@ export function BulkActionToolbar({
   isReanalyzing = false,
   isRotating = false,
   isRemovingBackground = false,
+  productPhoto = false,
   variant = 'items',
   pagination,
 }: BulkActionToolbarProps) {
@@ -212,10 +215,14 @@ export function BulkActionToolbar({
                   size="icon"
                   className="h-8 w-8 shrink-0"
                   disabled={isRemovingBackground}
-                  aria-label={t('bulkActions.removeBackground')}
+                  aria-label={t(
+                    productPhoto ? 'bulkActions.makeProductPhoto' : 'bulkActions.removeBackground'
+                  )}
                 >
                   {isRemovingBackground ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : productPhoto ? (
+                    <Wand2 className="h-4 w-4" />
                   ) : (
                     <Eraser className="h-4 w-4" />
                   )}
@@ -224,12 +231,20 @@ export function BulkActionToolbar({
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>
-                    {tWardrobe('bulkActions.removeBackgroundConfirmTitle', { count: selectedCount })}
+                    {tWardrobe(
+                      productPhoto
+                        ? 'bulkActions.productPhotoConfirmTitle'
+                        : 'bulkActions.removeBackgroundConfirmTitle',
+                      { count: selectedCount }
+                    )}
                   </AlertDialogTitle>
                   <AlertDialogDescription>
-                    {tWardrobe('bulkActions.removeBackgroundConfirmDescription', {
-                      count: selectedCount,
-                    })}
+                    {tWardrobe(
+                      productPhoto
+                        ? 'bulkActions.productPhotoConfirmDescription'
+                        : 'bulkActions.removeBackgroundConfirmDescription',
+                      { count: selectedCount }
+                    )}
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>

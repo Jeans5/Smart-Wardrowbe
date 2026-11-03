@@ -14,7 +14,8 @@
     "removeBackground": "Remove background",
     "rotateCcw": "Rotate left",
     "rotateCw": "Rotate right",
-    "selectAllMatching": "일치하는 {count}개 전체 선택"
+    "selectAllMatching": "일치하는 {count}개 전체 선택",
+    "makeProductPhoto": "Make product photo"
   },
   "cancel": "취소",
   "change": "변경",

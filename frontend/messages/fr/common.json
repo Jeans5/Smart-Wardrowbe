@@ -14,7 +14,8 @@
     "removeBackground": "Remove background",
     "rotateCcw": "Rotate left",
     "rotateCw": "Rotate right",
-    "selectAllMatching": "Sélectionner les {count} correspondants"
+    "selectAllMatching": "Sélectionner les {count} correspondants",
+    "makeProductPhoto": "Make product photo"
   },
   "cancel": "Annuler",
   "change": "Modifier",

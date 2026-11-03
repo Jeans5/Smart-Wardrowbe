@@ -7,10 +7,19 @@ import { applySessionToken } from '@/lib/hooks/use-session-token';
 import { queryKeys } from '@/lib/hooks/query-keys';
 import { SLOW_STALE_TIME } from '@/lib/hooks/query-timing';
 
-interface Features {
+export interface Features {
   background_removal: boolean;
+  // "product_photo": an image model redraws the item as a pressed catalogue photo;
+  // "cutout": the background is only cut away. Absent on servers that predate it.
+  background_removal_mode?: 'product_photo' | 'cutout' | null;
+  // Whether every new photo gets its product photo without anyone pressing a button.
+  product_photo_auto?: boolean;
   max_upload_size_mb: number;
   max_bulk_upload_count?: number;
+}
+
+export function isProductPhotoMode(features: Pick<Features, 'background_removal_mode'> | undefined) {
+  return features?.background_removal_mode === 'product_photo';
 }
 
 // An upload waits on this request before its first chunk, so a server that never answers

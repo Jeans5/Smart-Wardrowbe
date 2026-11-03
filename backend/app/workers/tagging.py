@@ -14,6 +14,7 @@ from app.models.preference import UserPreference
 from app.models.user import User
 from app.services.ai_service import AIService, ClothingTags, repeats_identically
 from app.utils.locale import DEFAULT_LOCALE
+from app.workers.background_removal import queue_product_photo_after_tagging
 from app.workers.db import get_db_session
 
 logger = logging.getLogger(__name__)
@@ -173,7 +174,9 @@ async def update_item_status_to_error(ctx: dict, item_id: str, error_msg: str) -
         logger.error(f"Failed to update item {item_id} status to error: {e}")
 
 
-async def tag_item_image(ctx: dict, item_id: str, image_path: str) -> dict[str, Any]:
+async def tag_item_image(
+    ctx: dict, item_id: str, image_path: str, product_photo: bool = False
+) -> dict[str, Any]:
     """
     Analyze an item's image and update it with AI-generated tags.
 
@@ -181,6 +184,8 @@ async def tag_item_image(ctx: dict, item_id: str, image_path: str) -> dict[str, 
         ctx: arq context
         item_id: UUID of the item to tag
         image_path: Path to the image file
+        product_photo: Queue the automatic product photo once tagging succeeded.
+            Set only for a new upload, never for a re-analysis.
 
     Returns:
         Dict with status and tags
@@ -344,7 +349,7 @@ async def tag_item_image(ctx: dict, item_id: str, image_path: str) -> dict[str, 
             await db.commit()
             logger.info(f"Updated item {item_id} with AI tags (status=ready)")
 
-            return {
+            outcome = {
                 "status": "success",
                 "item_id": item_id,
                 "tags": tags.model_dump(exclude={"raw_response"}),
@@ -352,6 +357,12 @@ async def tag_item_image(ctx: dict, item_id: str, image_path: str) -> dict[str, 
 
         finally:
             await db.close()
+
+        if product_photo:
+            # After the tags are committed, so the redraw can be told what the item is,
+            # and a product-photo problem can never undo or retry the tagging itself.
+            await queue_product_photo_after_tagging(ctx, item_id)
+        return outcome
 
     except asyncio.CancelledError:
         # A cancelled attempt (worker shutdown, or cancel_item_analysis's abort) must

@@ -14,7 +14,8 @@
     "removeBackground": "Remove background",
     "rotateCcw": "Rotate left",
     "rotateCw": "Rotate right",
-    "selectAllMatching": "一致する{count}件すべてを選択"
+    "selectAllMatching": "一致する{count}件すべてを選択",
+    "makeProductPhoto": "Make product photo"
   },
   "cancel": "キャンセル",
   "change": "変更",

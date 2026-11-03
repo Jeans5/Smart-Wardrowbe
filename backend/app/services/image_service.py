@@ -164,6 +164,19 @@ class ImageService:
         """Get full path for an image."""
         return self.storage_path / relative_path
 
+    def analysis_source_path(self, image_path: str, original_image_path: str | None) -> Path:
+        """The photo AI tagging should look at: the one taken, not a processed copy.
+
+        A product photo is a redraw, so re-analysing it would tag the model's
+        rendition rather than the garment. Falls back to the current image when no
+        backup exists or the file has gone missing.
+        """
+        if original_image_path:
+            backup = self.storage_path / original_image_path
+            if backup.exists():
+                return backup
+        return self.storage_path / image_path
+
     def delete_images(self, paths: dict[str, str | None]) -> None:
         """Delete all image files for an item."""
         for path in paths.values():
@@ -251,6 +264,7 @@ class ImageService:
         self,
         image_path: str,
         bg_color: tuple[int, int, int] = (255, 255, 255),
+        hint: str | None = None,
     ) -> dict[str, str]:
         base_path = image_path.rsplit(".", 1)[0]
         original_full = self.storage_path / image_path
@@ -258,16 +272,31 @@ class ImageService:
         if not original_full.exists():
             raise ValueError(f"Image not found: {image_path}")
 
+        # Resolved before any file is touched, so a misconfigured provider leaves no
+        # backup behind for an image that was never processed.
+        provider = background_removal.get_provider()
+
         backup_path = f"{base_path}_orig.jpg"
         backup_full = self.storage_path / backup_path
+        # A provider that repaints the photo works from the untouched original on every
+        # run; a cut-out provider keeps working on the current image as before.
+        source_full = (
+            backup_full
+            if getattr(provider, "uses_original_source", False) is True and backup_full.exists()
+            else original_full
+        )
+        image = Image.open(source_full).convert("RGB")
+
+        if isinstance(provider, background_removal.GeminiProductPhotoProvider):
+            result = provider.generate(image, bg_color=bg_color, hint=hint)
+        else:
+            result = provider.remove(image)
+
         # First removal wins: a second removal must not overwrite the true
-        # original with an already-processed image
+        # original with an already-processed image. Written only once the provider
+        # succeeded, so a failed run leaves the item exactly as it was.
         if not backup_full.exists():
             shutil.copy2(original_full, backup_full)
-
-        image = Image.open(original_full).convert("RGB")
-        provider = background_removal.get_provider()
-        result = provider.remove(image)
 
         # Composite onto solid color background
         background = Image.new("RGBA", result.size, (*bg_color, 255))

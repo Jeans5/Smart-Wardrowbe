@@ -18,6 +18,7 @@ import {
   RotateCcw,
   RotateCw,
   Eraser,
+  Wand2,
   Undo2,
   ImagePlus,
   Layers,
@@ -89,7 +90,7 @@ import {
   type ItemEdits,
   type TagDraft,
 } from '@/lib/tag-edits';
-import { useFeatures } from '@/lib/hooks/use-features';
+import { isProductPhotoMode, useFeatures } from '@/lib/hooks/use-features';
 import { useLocale, useTranslations } from 'next-intl';
 import { formatDate } from '@/lib/utils';
 
@@ -190,6 +191,7 @@ export function ItemDetailDialog({ item, open, onOpenChange }: ItemDetailDialogP
   const replaceImage = useReplaceItemImage();
   const replaceImageInputRef = useRef<HTMLInputElement>(null);
   const { data: features } = useFeatures();
+  const productPhoto = isProductPhotoMode(features);
   const logWear = useLogWear();
   const logWash = useLogWash();
   const { data: washHistory } = useWashHistory(item?.id || '');
@@ -325,10 +327,12 @@ export function ItemDetailDialog({ item, open, onOpenChange }: ItemDetailDialogP
     try {
       await removeBackground.mutateAsync({ id: item.id });
       setImageKey((k) => k + 1);
-      toast.success(t('actions.backgroundRemoved'));
+      toast.success(t(productPhoto ? 'actions.productPhotoMade' : 'actions.backgroundRemoved'));
     } catch (error) {
       console.error('Failed to remove background:', error);
-      toast.error(t('actions.backgroundRemoveError'));
+      // The server's reason (a refused photo, a key without billing) is already shown
+      // by the global mutation error toast.
+      toast.error(t(productPhoto ? 'actions.productPhotoError' : 'actions.backgroundRemoveError'));
     }
   };
 
@@ -469,10 +473,12 @@ export function ItemDetailDialog({ item, open, onOpenChange }: ItemDetailDialogP
                     size="icon"
                     onClick={handleRemoveBackground}
                     disabled={removeBackground.isPending || !item.image_url}
-                    title={t('titles.removeBackground')}
+                    title={t(productPhoto ? 'titles.makeProductPhoto' : 'titles.removeBackground')}
                   >
                     {removeBackground.isPending ? (
                       <Loader2 className="h-5 w-5 animate-spin" />
+                    ) : productPhoto ? (
+                      <Wand2 className="h-5 w-5" />
                     ) : (
                       <Eraser className="h-5 w-5" />
                     )}
@@ -484,7 +490,9 @@ export function ItemDetailDialog({ item, open, onOpenChange }: ItemDetailDialogP
                     size="icon"
                     onClick={handleRestoreOriginal}
                     disabled={restoreOriginal.isPending}
-                    title={t('titles.undoBackgroundRemoval')}
+                    title={t(
+                      productPhoto ? 'titles.undoProductPhoto' : 'titles.undoBackgroundRemoval'
+                    )}
                   >
                     {restoreOriginal.isPending ? (
                       <Loader2 className="h-5 w-5 animate-spin" />

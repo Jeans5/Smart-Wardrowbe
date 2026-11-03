@@ -88,7 +88,10 @@
     "retryCooldown": "{seconds, plural, one {Retry available in # second} other {Retry available in # seconds}}",
     "rotateFailed": "Rotation failed",
     "rotateQueued": "Queued for rotation",
-    "rotating": "Rotating…"
+    "rotating": "Rotating…",
+    "makingProductPhotoElapsed": "Making product photo… {elapsed}",
+    "productPhotoFailed": "Product photo failed",
+    "productPhotoQueued": "Queued for product photo"
   },
   "allTypes": "Alle Typen",
   "bulkActions": {
@@ -113,7 +116,12 @@
     "rotateError": "Failed to rotate items",
     "rotatePartialFailed": "{count, plural, one {Failed to rotate # item} other {Failed to rotate # items}}",
     "rotateQueued": "{count, plural, one {Queued # item for rotation} other {Queued # items for rotation}}",
-    "rotateSkipped": "{count, plural, one {# item skipped (already processing)} other {# items skipped (already processing)}}"
+    "rotateSkipped": "{count, plural, one {# item skipped (already processing)} other {# items skipped (already processing)}}",
+    "productPhotoAlreadyDone": "{count, plural, one {# item already has a product photo} other {# items already have a product photo}}",
+    "productPhotoConfirmDescription": "AI redraws {count, plural, one {# selected item} other {# selected items}} as a pressed product photo on a white background. With Gemini this costs a few cents per photo. The original photo is kept and can be restored per item afterward.",
+    "productPhotoConfirmTitle": "Make product photos of {count, plural, one {# item} other {# items}}?",
+    "productPhotoError": "Failed to queue product photos",
+    "productPhotoQueued": "{count, plural, one {Queued # item for a product photo} other {Queued # items for a product photo}}"
   },
   "bulkDelete": {
     "confirmDescription": "Die ausgewählten Stücke und ihre Bilder werden endgültig gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.",
@@ -174,7 +182,9 @@
       "logWear": "Tragen erfassen",
       "wearLogged": "Tragen erfasst",
       "wearLogError": "Tragen konnte nicht erfasst werden",
-      "washed": "Stück als gewaschen markiert"
+      "washed": "Stück als gewaschen markiert",
+      "productPhotoError": "Failed to make product photo",
+      "productPhotoMade": "Product photo made"
     },
     "brand": "Marke",
     "name": "Name",
@@ -215,7 +225,9 @@
       "setAsPrimary": "Als Hauptbild festlegen",
       "suggestOutfit": "Outfit mit diesem Teil erstellen",
       "toggleFavorite": "Favorit umschalten",
-      "undoBackgroundRemoval": "Hintergrundentfernung rückgängig machen"
+      "undoBackgroundRemoval": "Hintergrundentfernung rückgängig machen",
+      "makeProductPhoto": "Make product photo",
+      "undoProductPhoto": "Back to the original photo"
     },
     "type": "Typ",
     "unrecognizedType": "Die KI hat „{value}“ erkannt, das ist kein unterstützter Typ. Wähle unten den passendsten Typ; „{value}“ kannst du als Untertyp behalten.",

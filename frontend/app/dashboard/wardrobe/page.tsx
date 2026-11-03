@@ -29,6 +29,7 @@ import { ItemDetailDialog } from '@/components/item-detail-dialog';
 import { BulkActionToolbar, BulkSelection } from '@/components/bulk-action-toolbar';
 import { useItems, useItem, useItemTypes, useReanalyzeItem, useCancelAnalysis, useBulkDeleteItems, useBulkReanalyzeItems, useBulkCancelAnalysis, useBulkRotateItems, useBulkRemoveBackgroundItems, useRemoveBackground, useTaggingProgress, BulkItemFilters, BulkOperationParams, tagProcessingLabel, formatAnalyzingElapsed, deriveQueueSummary } from '@/lib/hooks/use-items';
 import { useUserTimezone } from '@/lib/hooks/use-user';
+import { isProductPhotoMode, useFeatures } from '@/lib/hooks/use-features';
 import { colorSwatch, normalizeColor } from '@/lib/colors';
 import { Item } from '@/lib/types';
 import { useClothingTypes, useClothingColors, useSubtypeLabel, useTypeLabel } from '@/lib/hooks/use-translated-constants';
@@ -66,6 +67,7 @@ function ItemCard({
   onDismissError,
   errorDismissed,
   userTimezone,
+  productPhoto = false,
 }: {
   item: Item;
   selected: boolean;
@@ -77,6 +79,7 @@ function ItemCard({
   onDismissError?: (id: string) => void;
   errorDismissed?: boolean;
   userTimezone: string;
+  productPhoto?: boolean;
 }) {
   const typeLabel = useTypeLabel();
   const t = useTranslations('wardrobe');
@@ -150,6 +153,13 @@ function ItemCard({
               {(() => {
                 const label = tagProcessingLabel(item);
                 if (label === 'removing_background') {
+                  if (productPhoto) {
+                    return item.ai_started_at
+                      ? t('ai.makingProductPhotoElapsed', {
+                          elapsed: formatAnalyzingElapsed(item.ai_started_at),
+                        })
+                      : t('ai.productPhotoQueued');
+                  }
                   return item.ai_started_at
                     ? t('ai.removingBackgroundElapsed', {
                         elapsed: formatAnalyzingElapsed(item.ai_started_at),
@@ -185,7 +195,7 @@ function ItemCard({
             <AlertCircle className="h-6 w-6 text-red-400" />
             <span className="text-white text-xs font-medium text-center">
               {isBackgroundRemovalKind
-                ? t('ai.backgroundRemovalFailed')
+                ? t(productPhoto ? 'ai.productPhotoFailed' : 'ai.backgroundRemovalFailed')
                 : isRotateKind
                   ? t('ai.rotateFailed')
                   : t('ai.analysisFailed')}
@@ -434,6 +444,8 @@ export default function WardrobePage() {
   const bulkRotate = useBulkRotateItems();
   const bulkRemoveBackground = useBulkRemoveBackgroundItems();
   const removeBackground = useRemoveBackground();
+  const { data: features } = useFeatures();
+  const productPhoto = isProductPhotoMode(features);
 
   const items = data?.items || [];
   const total = data?.total || 0;
@@ -476,6 +488,15 @@ export default function WardrobePage() {
   };
 
   const handleRetryBackgroundRemoval = (itemId: string) => {
+    if (productPhoto) {
+      // A redraw takes tens of seconds, so it goes through the queue: the card then
+      // shows its progress instead of sitting on the error until the request returns.
+      bulkRemoveBackground.mutate(
+        { item_ids: [itemId] },
+        { onError: () => toast.error(t('bulkActions.productPhotoError')) }
+      );
+      return;
+    }
     removeBackground.mutate({ id: itemId });
   };
 
@@ -629,20 +650,33 @@ export default function WardrobePage() {
     try {
       const result = await bulkRemoveBackground.mutateAsync(params);
       if (result.queued > 0) {
-        toast.success(t('bulkActions.removeBackgroundQueued', { count: result.queued }));
+        toast.success(
+          t(productPhoto ? 'bulkActions.productPhotoQueued' : 'bulkActions.removeBackgroundQueued', {
+            count: result.queued,
+          })
+        );
       }
       if (result.skipped > 0) {
         toast.info(t('bulkActions.removeBackgroundSkipped', { count: result.skipped }));
       }
       if (result.already_done > 0) {
-        toast.info(t('bulkActions.removeBackgroundAlreadyDone', { count: result.already_done }));
+        toast.info(
+          t(
+            productPhoto
+              ? 'bulkActions.productPhotoAlreadyDone'
+              : 'bulkActions.removeBackgroundAlreadyDone',
+            { count: result.already_done }
+          )
+        );
       }
       if (result.failed > 0) {
         toast.error(t('bulkActions.removeBackgroundPartialFailed', { count: result.failed }));
       }
       handleClearSelection();
     } catch {
-      toast.error(t('bulkActions.removeBackgroundError'));
+      toast.error(
+        t(productPhoto ? 'bulkActions.productPhotoError' : 'bulkActions.removeBackgroundError')
+      );
     }
   };
 
@@ -916,6 +950,7 @@ export default function WardrobePage() {
                 onDismissError={handleDismissError}
                 errorDismissed={dismissedErrors.has(`${item.id}:${item.updated_at}`)}
                 userTimezone={userTimezone}
+                productPhoto={productPhoto}
               />
             );
           })}
@@ -937,6 +972,7 @@ export default function WardrobePage() {
         isReanalyzing={bulkReanalyze.isPending}
         isRotating={bulkRotate.isPending}
         isRemovingBackground={bulkRemoveBackground.isPending}
+        productPhoto={productPhoto}
         variant="items"
         pagination={{ page, pageSize, onPageChange: handlePageChange }}
       />

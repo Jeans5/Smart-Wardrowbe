@@ -6,7 +6,7 @@ from sqlalchemy import text
 from app.config import get_settings
 from app.database import DbSession
 from app.services.ai_service import get_ai_service
-from app.services.background_removal import get_provider
+from app.services.background_removal import GeminiProductPhotoProvider, get_provider
 
 router = APIRouter()
 
@@ -68,10 +68,21 @@ async def feature_check() -> dict[str, Any]:
         "max_bulk_upload_count": get_settings().max_bulk_upload_count,
     }
     try:
-        get_provider()
+        provider = get_provider()
         features["background_removal"] = True
+        # "product_photo" redraws the item with an image model; "cutout" only removes
+        # the background. The UI words its buttons and progress labels after this.
+        features["background_removal_mode"] = (
+            "product_photo" if isinstance(provider, GeminiProductPhotoProvider) else "cutout"
+        )
+        features["product_photo_auto"] = (
+            features["background_removal_mode"] == "product_photo"
+            and get_settings().product_photo_auto
+        )
     except Exception:
         features["background_removal"] = False
+        features["background_removal_mode"] = None
+        features["product_photo_auto"] = False
     return features
 
 

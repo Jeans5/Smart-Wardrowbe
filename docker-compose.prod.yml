@@ -151,6 +151,9 @@ services:
       BG_REMOVAL_MODEL: ${BG_REMOVAL_MODEL:-u2net}
       BG_REMOVAL_URL: ${BG_REMOVAL_URL:-}
       BG_REMOVAL_API_KEY: ${BG_REMOVAL_API_KEY:-}
+      PRODUCT_PHOTO_MODEL: ${PRODUCT_PHOTO_MODEL:-gemini-3.1-flash-image-preview}
+      PRODUCT_PHOTO_API_KEY: ${PRODUCT_PHOTO_API_KEY:-}
+      PRODUCT_PHOTO_AUTO: ${PRODUCT_PHOTO_AUTO:-true}
     volumes:
       - uploads_data:/data/uploads
       - rembg_models:/opt/rembg/models

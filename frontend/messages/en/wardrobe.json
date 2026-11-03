@@ -88,7 +88,10 @@
     "retryCooldown": "{seconds, plural, one {Retry available in # second} other {Retry available in # seconds}}",
     "rotateFailed": "Rotation failed",
     "rotateQueued": "Queued for rotation",
-    "rotating": "Rotating…"
+    "rotating": "Rotating…",
+    "makingProductPhotoElapsed": "Making product photo… {elapsed}",
+    "productPhotoFailed": "Product photo failed",
+    "productPhotoQueued": "Queued for product photo"
   },
   "allTypes": "All types",
   "bulkActions": {
@@ -113,7 +116,12 @@
     "rotateError": "Failed to queue rotation",
     "rotatePartialFailed": "{count, plural, one {Failed to queue # item for rotation} other {Failed to queue # items for rotation}}",
     "rotateQueued": "{count, plural, one {Queued # item for rotation} other {Queued # items for rotation}}",
-    "rotateSkipped": "{count, plural, one {# item skipped (already processing)} other {# items skipped (already processing)}}"
+    "rotateSkipped": "{count, plural, one {# item skipped (already processing)} other {# items skipped (already processing)}}",
+    "productPhotoAlreadyDone": "{count, plural, one {# item already has a product photo} other {# items already have a product photo}}",
+    "productPhotoConfirmDescription": "AI redraws {count, plural, one {# selected item} other {# selected items}} as a pressed product photo on a white background. With Gemini this costs a few cents per photo. The original photo is kept and can be restored per item afterward.",
+    "productPhotoConfirmTitle": "Make product photos of {count, plural, one {# item} other {# items}}?",
+    "productPhotoError": "Failed to queue product photos",
+    "productPhotoQueued": "{count, plural, one {Queued # item for a product photo} other {Queued # items for a product photo}}"
   },
   "bulkDelete": {
     "confirmDescription": "This will permanently delete the selected items and their images. This action cannot be undone.",
@@ -174,7 +182,9 @@
       "logWear": "Log wear",
       "wearLogged": "Wear logged",
       "wearLogError": "Failed to log wear",
-      "washed": "Item marked as washed"
+      "washed": "Item marked as washed",
+      "productPhotoError": "Failed to make product photo",
+      "productPhotoMade": "Product photo made"
     },
     "brand": "Brand",
     "name": "Name",
@@ -215,7 +225,9 @@
       "setAsPrimary": "Set as primary",
       "suggestOutfit": "Create outfit with this item",
       "toggleFavorite": "Toggle favorite",
-      "undoBackgroundRemoval": "Undo background removal"
+      "undoBackgroundRemoval": "Undo background removal",
+      "makeProductPhoto": "Make product photo",
+      "undoProductPhoto": "Back to the original photo"
     },
     "type": "Type",
     "unrecognizedType": "AI detected “{value}”, which isn't a supported type. Pick the closest type below; you can keep “{value}” as the subtype.",

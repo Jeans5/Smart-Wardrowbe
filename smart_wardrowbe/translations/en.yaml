@@ -2,8 +2,8 @@ configuration:
   gemini_api_key:
     name: Gemini API key
     description: >-
-      Free key from https://aistudio.google.com/apikey. Without a key the app starts but does
-      not recognise clothes.
+      Key from https://aistudio.google.com/apikey. Without a key the app starts but does not
+      recognise clothes. Product photos need billing enabled in Google AI Studio.
   household_profiles:
     name: Household members
     description: >-
@@ -17,5 +17,15 @@ configuration:
   ai_model:
     name: AI model
     description: Gemini model used to recognise clothes and build outfits.
+  product_photos:
+    name: Automatic product photos
+    description: >-
+      Gemini redraws every new photo as a pressed product photo on a white background. Costs a
+      few cents per photo and needs a key with billing enabled. The original photo is always kept.
+  photo_model:
+    name: Product photo model
+    description: >-
+      Gemini image model for product photos. If the name does not exist (any more), the app tries
+      the known alternatives itself.
 network:
   3000/tcp: Web interface (open this on the tablet)

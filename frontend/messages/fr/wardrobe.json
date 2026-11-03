@@ -88,7 +88,10 @@
     "retryCooldown": "{seconds, plural, one {Retry available in # second} other {Retry available in # seconds}}",
     "rotateFailed": "Rotation failed",
     "rotateQueued": "Queued for rotation",
-    "rotating": "Rotating…"
+    "rotating": "Rotating…",
+    "makingProductPhotoElapsed": "Making product photo… {elapsed}",
+    "productPhotoFailed": "Product photo failed",
+    "productPhotoQueued": "Queued for product photo"
   },
   "allTypes": "Tous les types",
   "bulkActions": {
@@ -113,7 +116,12 @@
     "rotateError": "Failed to rotate items",
     "rotatePartialFailed": "{count, plural, one {Failed to rotate # item} other {Failed to rotate # items}}",
     "rotateQueued": "{count, plural, one {Queued # item for rotation} other {Queued # items for rotation}}",
-    "rotateSkipped": "{count, plural, one {# item skipped (already processing)} other {# items skipped (already processing)}}"
+    "rotateSkipped": "{count, plural, one {# item skipped (already processing)} other {# items skipped (already processing)}}",
+    "productPhotoAlreadyDone": "{count, plural, one {# item already has a product photo} other {# items already have a product photo}}",
+    "productPhotoConfirmDescription": "AI redraws {count, plural, one {# selected item} other {# selected items}} as a pressed product photo on a white background. With Gemini this costs a few cents per photo. The original photo is kept and can be restored per item afterward.",
+    "productPhotoConfirmTitle": "Make product photos of {count, plural, one {# item} other {# items}}?",
+    "productPhotoError": "Failed to queue product photos",
+    "productPhotoQueued": "{count, plural, one {Queued # item for a product photo} other {Queued # items for a product photo}}"
   },
   "bulkDelete": {
     "confirmDescription": "Cela supprimera définitivement les articles sélectionnés et leurs images. Cette action est irréversible.",
@@ -174,7 +182,9 @@
       "logWear": "Noter un port",
       "wearLogged": "Port enregistré",
       "wearLogError": "Échec de l'enregistrement du port",
-      "washed": "Article marqué comme lavé"
+      "washed": "Article marqué comme lavé",
+      "productPhotoError": "Failed to make product photo",
+      "productPhotoMade": "Product photo made"
     },
     "brand": "Marque",
     "name": "Nom",
@@ -215,7 +225,9 @@
       "setAsPrimary": "Définir comme image principale",
       "suggestOutfit": "Créer une tenue avec cet article",
       "toggleFavorite": "Basculer le favori",
-      "undoBackgroundRemoval": "Annuler la suppression de l'arrière-plan"
+      "undoBackgroundRemoval": "Annuler la suppression de l'arrière-plan",
+      "makeProductPhoto": "Make product photo",
+      "undoProductPhoto": "Back to the original photo"
     },
     "type": "Type",
     "unrecognizedType": "L’IA a détecté « {value} », qui n’est pas un type pris en charge. Choisissez le type le plus proche ci-dessous ; vous pouvez garder « {value} » comme sous-type.",

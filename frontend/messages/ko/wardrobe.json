@@ -88,7 +88,10 @@
     "retryCooldown": "{seconds, plural, one {Retry available in # second} other {Retry available in # seconds}}",
     "rotateFailed": "Rotation failed",
     "rotateQueued": "Queued for rotation",
-    "rotating": "Rotating…"
+    "rotating": "Rotating…",
+    "makingProductPhotoElapsed": "Making product photo… {elapsed}",
+    "productPhotoFailed": "Product photo failed",
+    "productPhotoQueued": "Queued for product photo"
   },
   "allTypes": "전체 유형",
   "bulkActions": {
@@ -113,7 +116,12 @@
     "rotateError": "Failed to rotate items",
     "rotatePartialFailed": "{count, plural, one {Failed to rotate # item} other {Failed to rotate # items}}",
     "rotateQueued": "{count, plural, one {Queued # item for rotation} other {Queued # items for rotation}}",
-    "rotateSkipped": "{count, plural, one {# item skipped (already processing)} other {# items skipped (already processing)}}"
+    "rotateSkipped": "{count, plural, one {# item skipped (already processing)} other {# items skipped (already processing)}}",
+    "productPhotoAlreadyDone": "{count, plural, one {# item already has a product photo} other {# items already have a product photo}}",
+    "productPhotoConfirmDescription": "AI redraws {count, plural, one {# selected item} other {# selected items}} as a pressed product photo on a white background. With Gemini this costs a few cents per photo. The original photo is kept and can be restored per item afterward.",
+    "productPhotoConfirmTitle": "Make product photos of {count, plural, one {# item} other {# items}}?",
+    "productPhotoError": "Failed to queue product photos",
+    "productPhotoQueued": "{count, plural, one {Queued # item for a product photo} other {Queued # items for a product photo}}"
   },
   "bulkDelete": {
     "confirmDescription": "선택한 아이템과 이미지가 영구적으로 삭제돼요. 이 작업은 되돌릴 수 없어요.",
@@ -174,7 +182,9 @@
       "logWear": "착용 기록",
       "wearLogged": "착용을 기록했어요",
       "wearLogError": "착용 기록 실패",
-      "washed": "세탁 완료로 표시되었어요"
+      "washed": "세탁 완료로 표시되었어요",
+      "productPhotoError": "Failed to make product photo",
+      "productPhotoMade": "Product photo made"
     },
     "brand": "브랜드",
     "name": "이름",
@@ -215,7 +225,9 @@
       "setAsPrimary": "대표 이미지로 설정",
       "suggestOutfit": "이 아이템으로 코디 만들기",
       "toggleFavorite": "즐겨찾기 전환",
-      "undoBackgroundRemoval": "배경 제거 취소"
+      "undoBackgroundRemoval": "배경 제거 취소",
+      "makeProductPhoto": "Make product photo",
+      "undoProductPhoto": "Back to the original photo"
     },
     "type": "유형",
     "unrecognizedType": "AI가 “{value}”(으)로 인식했지만 지원되지 않는 유형입니다. 아래에서 가장 가까운 유형을 선택하세요. “{value}”는 세부 유형으로 남겨둘 수 있습니다.",
