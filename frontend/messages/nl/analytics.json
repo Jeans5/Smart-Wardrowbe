@@ -1,0 +1,69 @@
+{
+  "insightColorHeavy": "Je kleerkast bevat veel {color} ({percent}). Misschien wat meer variatie toevoegen?",
+  "insightGreatTaste": "Goede smaak! Je aanvaardt {percent} van de voorstellen.",
+  "insightLimitedColors": "Je kleerkast heeft weinig kleurvariatie. Probeer eens nieuwe kleuren!",
+  "insightManyRejections": "Je wijst veel voorstellen af. Misschien je stijlvoorkeuren bijwerken?",
+  "insightMoreBottomsThanTops": "Je hebt meer broeken en rokken dan bovenstukken. Misschien een paar shirts toevoegen?",
+  "insightMoreTopsThanBottoms": "Je hebt veel meer bovenstukken dan broeken of rokken. Misschien een broek of rok toevoegen?",
+  "insightMostlyLayers": "De meeste van je bovenstukken zijn laagjes zoals cardigans en gilets. Voeg een paar basics toe om eronder te dragen!",
+  "insightNeverWorn": "{count, plural, one {Je hebt # stuk dat je nog nooit gedragen hebt. Combineer het eens!} other {Je hebt # stuks die je nog nooit gedragen hebt. Combineer ze eens!}}",
+  "insightNoOutfitsThisWeek": "Je hebt deze week nog geen outfits gemaakt. Vraag eens een voorstel!",
+  "insightStartAdding": "Begin met een paar stuks aan je kleerkast toe te voegen!",
+  "insights": {
+    "acceptanceTrend": {
+      "description": "Hoe je doorheen de tijd op voorstellen reageerde",
+      "title": "Evolutie aanvaarding"
+    },
+    "colorDistribution": {
+      "description": "De meest voorkomende kleuren in je kleerkast",
+      "noData": "Nog geen kleurgegevens",
+      "title": "Kleurverdeling"
+    },
+    "itemTypes": {
+      "description": "Verdeling per soort kledij",
+      "noData": "Nog geen stuks",
+      "title": "Soorten stuks"
+    },
+    "leastWorn": {
+      "description": "Draag deze eens",
+      "noData": "Blijf bijhouden!",
+      "title": "Minst gedragen"
+    },
+    "mostWorn": {
+      "description": "Je favorieten",
+      "noData": "Begin je outfits bij te houden!",
+      "title": "Meest gedragen"
+    },
+    "neverWorn": {
+      "description": "Tijd om deze te proberen?",
+      "noData": "Alle stuks zijn al gedragen!",
+      "title": "Nooit gedragen"
+    },
+    "title": "Inzichten"
+  },
+  "loadError": "Statistieken laden mislukt. Probeer het opnieuw.",
+  "percent": "{value}%",
+  "stats": {
+    "acceptanceRate": {
+      "description": "van de voorstellen aanvaard",
+      "title": "Aanvaardingsgraad"
+    },
+    "avgRating": "Gem. score: {rating}/5",
+    "outfitsGenerated": {
+      "description": "{count} deze week",
+      "title": "Gemaakte outfits"
+    },
+    "totalItems": {
+      "description": "{count} klaar om te dragen",
+      "title": "Totaal stuks"
+    },
+    "totalWears": {
+      "description": "Houd je outfits bij",
+      "noData": "Nog geen gegevens",
+      "title": "Keer gedragen"
+    }
+  },
+  "subtitle": "Inzichten en statistieken over je kleerkast",
+  "title": "Statistieken",
+  "wearCount": "{count}x"
+}

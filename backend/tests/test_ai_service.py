@@ -41,6 +41,7 @@ class TestLocalizedDescription:
             ("fr", "French"),
             ("de", "German"),
             ("it", "Italian"),
+            ("nl", "Dutch"),
         ],
     )
     @pytest.mark.asyncio

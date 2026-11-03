@@ -1,0 +1,80 @@
+{
+  "complete": {
+    "description": "Je kleerkast is klaar. Voeg kleren toe en krijg persoonlijke outfitvoorstellen!",
+    "finishing": "Afronden...",
+    "goToDashboard": "Naar dashboard",
+    "setupFailed": "Instellen afronden mislukt. Probeer het opnieuw.",
+    "title": "Je bent klaar!"
+  },
+  "family": {
+    "createFamily": "Gezin aanmaken",
+    "createFamilyDesc": "Start een nieuw gezin",
+    "description": "Maak een gezin aan of word lid om je kleerkast-ervaring te delen",
+    "error": "Gezin instellen mislukt. Probeer het opnieuw.",
+    "familyName": "Gezinsnaam",
+    "familyNamePlaceholder": "bv. Familie Peeters",
+    "inviteCode": "Uitnodigingscode",
+    "inviteCodePlaceholder": "bv. ABC123XY",
+    "joinFamily": "Lid worden",
+    "joinFamilyDesc": "Gebruik een uitnodigingscode",
+    "joinSuccess": "Je bent lid van het gezin!",
+    "success": "Gezin aangemaakt!",
+    "title": "Gezin instellen"
+  },
+  "firstItem": {
+    "addToWardrobe": "Aan kleerkast toevoegen",
+    "chooseDifferentPhoto": "Andere foto kiezen",
+    "description": "Neem een foto of upload een afbeelding van een kledingstuk",
+    "formatHint": "PNG, JPG of HEIC",
+    "previewAlt": "Voorbeeld",
+    "title": "Voeg je eerste stuk toe",
+    "typeLabel": "Wat voor kledingstuk is dit?",
+    "typePlaceholder": "Kies een soort...",
+    "uploadError": "Stuk uploaden mislukt. Probeer het opnieuw.",
+    "uploadPrompt": "Tik om te uploaden of een foto te nemen",
+    "uploadSuccess": "Stuk toegevoegd aan je kleerkast!"
+  },
+  "location": {
+    "cityLabel": "Stad/locatie",
+    "cityPlaceholder": "bv. Gent",
+    "description": "Hiermee stemmen we je outfitvoorstellen af op het weer",
+    "detectLocation": "Mijn locatie bepalen",
+    "locationError": "Locatie bepalen mislukt. Vul ze manueel in.",
+    "locationSuccess": "Locatie ingesteld!",
+    "orManual": "Of vul manueel in",
+    "saveError": "Locatie opslaan mislukt. Probeer het opnieuw.",
+    "title": "Je locatie"
+  },
+  "skipForNow": "Nu overslaan",
+  "steps": {
+    "family": "Gezin",
+    "firstItem": "Eerste stuk",
+    "location": "Locatie",
+    "style": "Stijl",
+    "welcome": "Welkom"
+  },
+  "style": {
+    "colorsToAvoid": "Kleuren om te vermijden",
+    "colorsToAvoidDesc": "Tik op kleuren die je liever niet draagt",
+    "description": "Help ons je stijlvoorkeuren te begrijpen",
+    "favoriteColors": "Favoriete kleuren",
+    "favoriteColorsDesc": "Tik op kleuren die je graag draagt",
+    "percentValue": "{value}%",
+    "saveError": "Stijlvoorkeuren opslaan mislukt.",
+    "saveSuccess": "Stijlvoorkeuren opgeslagen!",
+    "styleProfile": "Stijlprofiel",
+    "styleProfileDesc": "Stel in hoeveel je van elke stijl houdt",
+    "title": "Je stijl"
+  },
+  "welcome": {
+    "description": "We zetten je digitale kleerkast in een paar stappen op.",
+    "feature1": "Fotografeer je kleren",
+    "feature1Desc": "Onze AI duidt automatisch kleuren, stijlen en meer aan",
+    "feature2": "Krijg persoonlijke outfits",
+    "feature2Desc": "Dagelijkse voorstellen op basis van het weer en je stijl",
+    "feature3": "Deel met je gezin",
+    "feature3Desc": "Iedereen krijgt een eigen, persoonlijke kleerkast",
+    "getStarted": "Aan de slag",
+    "greeting": "Welkom bij Wardrowbe{name}!"
+  }
+}

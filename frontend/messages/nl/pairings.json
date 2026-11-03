@@ -1,0 +1,36 @@
+{
+  "allItemTypes": "Alle soorten",
+  "card": {
+    "badge": "Combinatie",
+    "builtAround": "Opgebouwd rond:",
+    "deleteError": "Combinatie verwijderen mislukt",
+    "deleted": "Combinatie verwijderd",
+    "externalBadge": "Extern",
+    "rateThisPairing": "Beoordeel deze combinatie",
+    "tip": "Tip:",
+    "updateRating": "Beoordeling bijwerken"
+  },
+  "empty": {
+    "description": "Kies een stuk uit je kleerkast en gebruik \"Combinaties zoeken\" om outfits te ontdekken die goed samengaan.",
+    "goToWardrobe": "Naar kleerkast",
+    "title": "Nog geen combinaties"
+  },
+  "generate": {
+    "colorAndType": "{type} ({color})",
+    "description": "AI maakt volledige outfits met dit stuk",
+    "failed": "Combinaties maken mislukt",
+    "generate": "Outfits maken",
+    "generating": "Bezig met maken...",
+    "numOutfits": "Aantal outfits",
+    "numOutfitsDesc": "Meer outfits = meer variatie, maar het duurt langer",
+    "success": "{count, plural, one {{count} outfit gemaakt!} other {{count} outfits gemaakt!}}",
+    "successDesc": "Bekijk ze bij Combinaties",
+    "title": "Passende outfits zoeken",
+    "viewPairings": "Combinaties bekijken"
+  },
+  "itemTypeOption": "{type} ({count})",
+  "loadError": "Combinaties laden mislukt. Probeer het opnieuw.",
+  "pairingCount": "{count, plural, one {{count} combinatie} other {{count} combinaties}}",
+  "subtitle": "Outfitcombinaties van AI, opgebouwd rond je stuks",
+  "title": "Combinaties"
+}

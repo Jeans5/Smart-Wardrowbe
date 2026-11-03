@@ -1,0 +1,41 @@
+{
+  "card": {
+    "accept": "Aanvaarden",
+    "acceptFailed": "Outfit aanvaarden mislukt",
+    "didntWearThis": "Niet gedragen",
+    "dismiss": "Wegklikken",
+    "dismissFailed": "Outfit wegklikken mislukt",
+    "familyLabel": "Gezin:",
+    "itemFallback": "Stuk",
+    "outfitAccepted": "Outfit aanvaard",
+    "outfitDismissed": "Outfit weggeklikt",
+    "rate": "Beoordelen",
+    "tip": "Tip:",
+    "update": "Bijwerken",
+    "viewItemDetails": "Details van stuk bekijken",
+    "woreInstead": "In de plaats gedragen:"
+  },
+  "empty": {
+    "description": "Je geschiedenis van outfitvoorstellen verschijnt hier zodra je voorstellen begint te krijgen.",
+    "getFirstSuggestion": "Krijg je eerste voorstel",
+    "title": "Nog geen voorstellen"
+  },
+  "filters": {
+    "allOccasions": "Alle gelegenheden",
+    "allStatus": "Alle statussen"
+  },
+  "loadError": "Geschiedenis laden mislukt. Probeer het opnieuw.",
+  "noOutfitsForDate": "Geen outfits op {date}",
+  "outfitCount": "{count, plural, one {# outfit} other {# outfits}}",
+  "status": {
+    "accepted": "Aanvaard",
+    "expired": "Verlopen",
+    "pending": "Openstaand",
+    "rejected": "Afgewezen",
+    "sent": "Verzonden",
+    "skipped": "Overgeslagen",
+    "viewed": "Bekeken"
+  },
+  "subtitle": "Bekijk je eerdere outfitvoorstellen",
+  "title": "Geschiedenis"
+}

@@ -1,0 +1,106 @@
+{
+  "baseItem": {
+    "all": "Alle",
+    "basePiece": "Basisstuk",
+    "change": "Wijzigen",
+    "chooseItem": "Kies een kledingstuk",
+    "chooseItemHint": "Kies een hemd, broek, schoenen of een ander stuk om rond te bouwen",
+    "clear": "Wissen",
+    "dialogDescription": "Kies een stuk uit je kleerkast om deze outfit rond op te bouwen.",
+    "dialogTitle": "Kies een stuk voor je outfit",
+    "mustInclude": "Moet erin",
+    "remove": "Verwijderen",
+    "subtitle": "Kies een hemd, broek, schoenen of een ander stuk dat zeker in de outfit moet",
+    "title": "Bouw rond een specifiek stuk (optioneel)"
+  },
+  "dismissOutfit": "Outfit wegklikken",
+  "error": "Outfitvoorstel maken mislukt. Probeer het opnieuw.",
+  "feedback": {
+    "commentsOptional": "Opmerkingen (optioneel)",
+    "commentsPlaceholder": "Wat vind je van deze outfit?",
+    "didYouWear": "Heb je deze outfit gedragen?",
+    "didYouWearDesc": "Laat weten of je dit voorstel gevolgd hebt, zodat we je voorkeuren leren kennen.",
+    "howDidItWork": "Hoe beviel deze outfit?",
+    "itemsSelected": "{count, plural, one {# stuk geselecteerd} other {# stuks geselecteerd}}",
+    "loadingMore": "Meer laden...",
+    "noItemsInWardrobe": "Geen stuks in je kleerkast",
+    "noMatch": "Geen stuks gevonden voor je zoekopdracht",
+    "noWoreSomethingElse": "Nee, ik droeg iets anders",
+    "overallRating": "Algemene score",
+    "rateHowItWent": "Beoordeel hoe het ging",
+    "rateThisOutfit": "Beoordeel deze outfit",
+    "searchWardrobe": "Zoek in je kleerkast...",
+    "showingAll": "{count, plural, one {Alle # stuk getoond} other {Alle # stuks getoond}}",
+    "submitError": "Feedback versturen mislukt",
+    "submitWithCount": "Versturen ({count})",
+    "submitted": "Feedback verstuurd",
+    "submitting": "Versturen...",
+    "tellUsWhatYouWore": "Vertel wat je droeg",
+    "whatDidYouWear": "Wat droeg je in de plaats?",
+    "whatDidYouWearDesc": "Kies de stuks die je echt gedragen hebt. Zo leren we je voorkeuren kennen.",
+    "yesWoreIt": "Ja, gedragen"
+  },
+  "generating": "Je look wordt samengesteld...",
+  "getSuggestion": "Voorstel krijgen",
+  "greeting": {
+    "afternoon": "Goedemiddag",
+    "evening": "Goedenavond",
+    "morning": "Goedemorgen"
+  },
+  "location": {
+    "notSet": "Locatie niet ingesteld",
+    "setDescription": "Stel je locatie in bij Instellingen voor voorstellen op basis van het weer"
+  },
+  "loveIt": "Top!",
+  "occasionPrompt": "Wat is de gelegenheid?",
+  "options": {
+    "allOptions": "Alles vergelijken",
+    "chooseThis": "Kies deze look",
+    "generateNew": "3 nieuwe looks maken",
+    "optionNumber": "Look {number}",
+    "singleView": "Eén tegelijk",
+    "title": "{count} outfitopties"
+  },
+  "outfitPreview": {
+    "familyRatings": {
+      "average": "(gem. {rating} <star></star>)",
+      "noRatings": "Nog geen beoordelingen van het gezin.",
+      "noRatingsPrompt": "Nog geen beoordelingen van het gezin. Wees de eerste!",
+      "rate": "Beoordelen",
+      "title": "Beoordelingen van het gezin"
+    },
+    "imageRotated": "Afbeelding gedraaid",
+    "noImage": "Geen afbeelding",
+    "rotateFailed": "Afbeelding draaien mislukt",
+    "rotateLeft": "Links draaien",
+    "rotateRight": "Rechts draaien",
+    "title": "Outfit voor {occasion}",
+    "viewItemDetails": "Details van stuk bekijken"
+  },
+  "startOver": "Opnieuw beginnen",
+  "subtitle": "We zoeken de perfecte outfit voor je dag",
+  "tip": "Tip:",
+  "tryAnother": "Ander voorstel",
+  "weather": {
+    "feelsLike": "Voelt als {temp}°",
+    "feelsLikeInline": "(voelt als {temp}°)",
+    "rainChance": "{chance}% regen",
+    "windSpeed": "{speed} km/u"
+  },
+  "weatherHints": {
+    "cold": "Laagjes aan - het is behoorlijk koud",
+    "hot": "Hou het licht en luchtig",
+    "mild": "Een licht jasje is perfect",
+    "nice": "Ideaal weer voor elke stijl",
+    "rainy": "Neem een paraplu of regenjas mee",
+    "windy": "Kies iets winddichts"
+  },
+  "weatherOverride": {
+    "active": "Weer handmatig ingesteld",
+    "condition": "Weersituatie",
+    "overrideWeather": "Weer aanpassen",
+    "reset": "Terugzetten",
+    "temperature": "Temperatuur"
+  },
+  "yourOutfit": "Je outfit"
+}

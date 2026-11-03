@@ -1,0 +1,174 @@
+{
+  "bulkActions": {
+    "deleteError": "Outfits verwijderen mislukt",
+    "deletePartialFailed": "{count, plural, one {# outfit} other {# outfits}} verwijderen mislukt",
+    "deleteSuccess": "{count, plural, one {# outfit} other {# outfits}} verwijderd",
+    "select": "Selecteren"
+  },
+  "bulkDelete": {
+    "confirmDescription": "Dit verwijdert de geselecteerde outfits definitief. Je kunt dit niet ongedaan maken.",
+    "confirmTitle": "{count, plural, one {# outfit} other {# outfits}} verwijderen?",
+    "confirmTitleAll": "Alle {count, plural, one {# outfit} other {# outfits}} verwijderen?"
+  },
+  "calendar": {
+    "legendOnDemand": "Op aanvraag",
+    "legendScheduled": "Gepland",
+    "monthlyCount": "{count, plural, one {# outfit} other {# outfits}} deze maand",
+    "noOutfitsOnDay": "Geen outfits op deze dag",
+    "outfitCount": "{count, plural, one {# outfit} other {# outfits}}",
+    "weekDays": {
+      "fri": "Vr",
+      "mon": "Ma",
+      "sat": "Za",
+      "sun": "Zo",
+      "thu": "Do",
+      "tue": "Di",
+      "wed": "Wo"
+    }
+  },
+  "canvas": {
+    "empty": "Tik hieronder op stuks om je outfit samen te stellen",
+    "removeItem": "{name} verwijderen"
+  },
+  "cards": {
+    "ai": "AI",
+    "external": "Extern",
+    "lookbookTemplate": "Lookbook-sjabloon",
+    "outfitFallback": "Outfit voor {occasion}",
+    "pairing": "Combinatie",
+    "replacement": "Vervanging",
+    "studio": "Studio",
+    "woreInsteadFallback": "{occasion} (in de plaats gedragen)",
+    "worn": "Gedragen"
+  },
+  "cloneToLookbook": {
+    "defaultName": "{occasion} · {date}",
+    "description": "Geef deze look een naam zodat je hem later terugvindt en opnieuw kunt dragen.",
+    "errorEmpty": "Vul een naam in",
+    "name": "Naam",
+    "namePlaceholder": "Brunch op vrijdag",
+    "saveError": "Opslaan in lookbook mislukt",
+    "saved": "Opgeslagen in lookbook",
+    "title": "Opslaan in lookbook"
+  },
+  "detail": {
+    "addedToToday": "Toegevoegd aan vandaag",
+    "backToOutfits": "Terug naar outfits",
+    "deleteConfirm": "Deze outfit verwijderen? Je kunt dit niet ongedaan maken.",
+    "deleteError": "Verwijderen mislukt",
+    "deleted": "Outfit verwijderd",
+    "items": "Stuks ({count})",
+    "lookbookTemplate": "Lookbook-sjabloon",
+    "notWornYet": "Deze look is nog niet gedragen. Tik op \"Vandaag dragen\" om hem te registreren.",
+    "saveToLookbook": "Opslaan in lookbook",
+    "seeAll": "Alles bekijken",
+    "stylingTip": "Tip:",
+    "undated": "Zonder datum",
+    "wearToday": "Vandaag dragen",
+    "wearTodayError": "Vandaag dragen mislukt",
+    "wornCount": "{count, plural, one {# keer} other {# keer}} gedragen"
+  },
+  "details": {
+    "addedItems": "{count, plural, one {# stuk} other {# stuks}} toegevoegd door AI",
+    "aiAssistError": "Kies eerst minstens één stuk en een gelegenheid",
+    "aiFailed": "AI-hulp mislukt",
+    "aiNoSuggestions": "AI had geen nieuwe stuks om voor te stellen",
+    "aiThinking": "AI denkt na...",
+    "letAiFinish": "Laat AI dit afwerken",
+    "name": "Naam",
+    "namePlaceholder": "Brunch op vrijdag",
+    "nameRequired": "(verplicht voor lookbook)",
+    "required": "verplicht",
+    "occasion": "Gelegenheid",
+    "pickOccasion": "Kies een gelegenheid voor je opslaat.",
+    "skippedItem": "{name} overgeslagen: {reason}",
+    "warnings": {
+      "multipleBottoms": "Meerdere broeken/rokken gekozen.",
+      "noBottoms": "Geen broek of rok gekozen.",
+      "noFootwear": "Geen schoenen gekozen.",
+      "noTop": "Geen bovenstuk gekozen."
+    }
+  },
+  "empty": {
+    "ai": "Nog geen AI-voorstellen.",
+    "all": "Nog geen outfits. Maak je eerste look!",
+    "myLooks": "Nog geen lookbook-sjablonen.",
+    "pairings": "Nog geen combinaties.",
+    "replacements": "Nog geen vervangende outfits.",
+    "worn": "Nog geen gedragen outfits."
+  },
+  "filters": {
+    "ai": "AI",
+    "all": "Alle",
+    "lookbook": "Lookbook",
+    "pairings": "Combinaties",
+    "replacements": "Vervangingen",
+    "worn": "Gedragen"
+  },
+  "itemPicker": {
+    "loadingMore": "Meer laden...",
+    "noItems": "Geen stuks gevonden",
+    "noMatch": "Geen stuks gevonden voor je zoekopdracht",
+    "search": "Zoek in kleerkast...",
+    "showingAll": "Alle {count, plural, one {# stuk} other {# stuks}} getoond"
+  },
+  "lineage": {
+    "fromLookbook": "Uit je lookbook-item {name}",
+    "replaces": "Vervangt voorstel voor {occasion}",
+    "replacesWithDate": "Vervangt voorstel voor {occasion} van {date}"
+  },
+  "loadError": "Outfits laden mislukt",
+  "loadMore": "Meer laden",
+  "new": {
+    "discardChanges": "Wijzigingen weggooien",
+    "draft": {
+      "found": "Je hebt een niet-opgeslagen concept van je vorige sessie. Verder werken?",
+      "resume": "Verder werken",
+      "startFresh": "Opnieuw beginnen"
+    },
+    "editOutfit": "Outfit bewerken",
+    "errors": {
+      "backToOutfits": "Terug naar outfits",
+      "cannotEdit": "Je kunt deze outfit niet bewerken",
+      "couldNotLoad": "Deze outfit kon niet geladen worden",
+      "couldNotLoadDesc": "Je sessie is mogelijk verlopen, of deze outfit hoort bij een ander account.",
+      "genericError": "Er ging iets mis bij het laden van deze outfit. Controleer je verbinding en probeer het opnieuw.",
+      "notFound": "Outfit niet gevonden",
+      "notFoundDesc": "Deze outfit bestaat niet meer. Hij is mogelijk verwijderd in een ander tabblad of op een ander toestel."
+    },
+    "nameRequired": "Geef je lookbook-item een naam voor je opslaat",
+    "outfitUpdated": "Outfit bijgewerkt",
+    "saveChanges": "Wijzigingen opslaan",
+    "saveError": "Outfit opslaan mislukt",
+    "saveToLookbook": "Opslaan in lookbook",
+    "savedAndMarkedWorn": "Opgeslagen en als gedragen gemarkeerd",
+    "savedToLookbook": "Opgeslagen in lookbook",
+    "studio": "Studio",
+    "tabs": {
+      "canvas": "Canvas",
+      "details": "Details",
+      "emptyWardrobe": "Nog geen stuks in je kleerkast. Voeg eerst stuks toe.",
+      "yourWardrobe": "Je kleerkast"
+    },
+    "validation": {
+      "needItem": "Kies minstens één stuk",
+      "needItemAndOccasion": "Kies minstens één stuk en een gelegenheid",
+      "needOccasion": "Kies een gelegenheid"
+    },
+    "wearToday": "Vandaag dragen",
+    "worn": {
+      "backToOutfit": "Terug naar outfit",
+      "description": "Gedragen outfits kun je niet bewerken, want ze horen bij je draaggeschiedenis.",
+      "saveAsNew": "Opslaan als nieuw",
+      "title": "Deze outfit is al gedragen"
+    }
+  },
+  "newOutfit": "Nieuwe outfit",
+  "search": "Zoek in lookbook...",
+  "subtitle": "Je looks, gedragen outfits en AI-voorstellen",
+  "title": "Outfits",
+  "totalCount": "{count} in totaal",
+  "viewCalendar": "Kalender",
+  "viewList": "Lijst",
+  "viewToggle": "Weergave wisselen"
+}

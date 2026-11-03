@@ -1,0 +1,97 @@
+{
+  "createFamily": "Gezin aanmaken",
+  "createFamilyDesc": "Start een nieuw gezin en nodig leden uit",
+  "editName": "Naam bewerken",
+  "familyName": "Gezinsnaam",
+  "familyNameExample": "bv. Familie Peeters",
+  "familyNamePlaceholder": "Gezinsnaam",
+  "familyOutfits": {
+    "description": "Bekijk en beoordeel de outfits van je gezinsleden",
+    "openFeed": "Gezinsfeed openen",
+    "title": "Gezinsoutfits"
+  },
+  "feed": {
+    "lookbook": "Lookbook",
+    "noFamily": {
+      "description": "Maak een gezin aan of word lid van een gezin om elkaars outfits te bekijken en te beoordelen.",
+      "setUpFamily": "Gezin instellen",
+      "title": "Word eerst lid van een gezin"
+    },
+    "noMembers": {
+      "description": "Nodig gezinsleden uit om elkaars outfits te bekijken en te beoordelen.",
+      "inviteMembers": "Leden uitnodigen",
+      "manageFamily": "Gezin beheren",
+      "title": "Nog geen andere leden"
+    },
+    "noOutfits": {
+      "description": "{member} heeft nog geen outfitvoorstellen gekregen. Kom later eens terug!",
+      "title": "Nog geen outfits"
+    },
+    "rateOutfit": "Outfit van {member} beoordelen",
+    "ratingCount": "({count, plural, one {{count} beoordeling} other {{count} beoordelingen}})",
+    "subtitle": "Bekijk en beoordeel de outfits van je gezinsleden",
+    "title": "Gezinsfeed",
+    "unknownMember": "Dit lid",
+    "unknownMemberShort": "dit lid"
+  },
+  "invalidInviteCode": "Ongeldige uitnodigingscode. Controleer de code en probeer het opnieuw.",
+  "inviteCode": "Uitnodigingscode",
+  "inviteCodeExample": "bv. ABC123XY",
+  "inviteCodeSection": {
+    "description": "Deel deze code met gezinsleden zodat ze kunnen deelnemen",
+    "title": "Uitnodigingscode"
+  },
+  "inviteEmailPlaceholder": "email@voorbeeld.be",
+  "joinFamily": "Lid worden",
+  "joinFamilyDesc": "Word lid van een bestaand gezin met een uitnodigingscode",
+  "leaveConfirm": {
+    "description": "Wil je {name} echt verlaten? Je kunt later opnieuw deelnemen met een uitnodigingscode.",
+    "title": "Gezin verlaten?"
+  },
+  "leaveFamily": "Gezin verlaten",
+  "members": {
+    "description": "De mensen in je gezin",
+    "removeConfirm": {
+      "description": "Wil je {name} echt uit het gezin verwijderen?",
+      "title": "Lid verwijderen?"
+    },
+    "title": "Leden"
+  },
+  "pendingInvites": {
+    "description": "Uitnodigingen die nog niet aanvaard zijn",
+    "expires": "Verloopt op {date}",
+    "title": "Openstaande uitnodigingen"
+  },
+  "ratings": {
+    "addComment": "Voeg een opmerking toe (optioneel)",
+    "ratingRemoved": "Beoordeling verwijderd",
+    "ratingSubmitted": "Beoordeling verstuurd!",
+    "ratingUpdated": "Beoordeling bijgewerkt!",
+    "removeError": "Beoordeling verwijderen mislukt",
+    "selectRating": "Kies een beoordeling",
+    "submitError": "Beoordeling versturen mislukt",
+    "submitRating": "Beoordeling versturen",
+    "updateRating": "Beoordeling bijwerken",
+    "yourRating": "Jouw beoordeling:"
+  },
+  "roles": {
+    "admin": "Beheerder",
+    "member": "Lid"
+  },
+  "sendInvite": "Uitnodiging sturen",
+  "sendInviteDesc": "Nodig iemand uit via e-mail",
+  "subtitle": "Maak een gezin aan of word lid om je kleerkast-ervaring te delen",
+  "title": "Gezin",
+  "toasts": {
+    "codeRegenerateFailed": "Nieuwe code maken mislukt. Probeer het opnieuw.",
+    "codeRegenerated": "Nieuwe uitnodigingscode gemaakt!",
+    "createFailed": "Gezin aanmaken mislukt. Probeer het opnieuw.",
+    "created": "Gezin aangemaakt!",
+    "inviteFailed": "Uitnodiging sturen mislukt",
+    "inviteNotEmailed": "Uitnodiging bewaard, maar de e-mail kon niet verstuurd worden. Deel in de plaats de uitnodigingscode.",
+    "inviteSent": "Uitnodiging verstuurd!",
+    "joined": "Je bent lid van het gezin!",
+    "nameUpdateFailed": "Gezinsnaam bijwerken mislukt",
+    "nameUpdated": "Gezinsnaam bijgewerkt"
+  }
+}

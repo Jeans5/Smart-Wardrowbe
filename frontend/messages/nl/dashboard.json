@@ -1,0 +1,66 @@
+{
+  "familyFeed": {
+    "browse": "Gezinsoutfits bekijken",
+    "description": "Zie wat je gezin draagt en beoordeel hun outfits",
+    "memberCount": "{count, plural, one {{count} lid in {name}} other {{count} leden in {name}}}",
+    "title": "Gezinsoutfits"
+  },
+  "insights": {
+    "empty": "Voeg meer stuks toe en maak outfits om persoonlijke inzichten te zien!",
+    "title": "Inzichten"
+  },
+  "layout": {
+    "loading": "Je kleerkast wordt geladen..."
+  },
+  "nextScheduled": {
+    "comingUp": "Binnenkort",
+    "dayAtTime": "{day} om {time}",
+    "noSchedules": "Geen planningen ingesteld",
+    "occasionOutfit": "Outfit voor {occasion}",
+    "setUpSchedule": "Planning instellen",
+    "title": "Volgende planning",
+    "today": "Vandaag",
+    "tomorrow": "Morgen"
+  },
+  "notifications": {
+    "activeCount": "{active} van {total} actief",
+    "addChannel": "Kanaal toevoegen",
+    "configure": "Instellen",
+    "noChannels": "Geen kanalen ingesteld",
+    "title": "Meldingen"
+  },
+  "pendingOutfits": {
+    "acceptFailed": "Outfit aanvaarden mislukt",
+    "accepted": "Outfit aanvaard",
+    "allCaughtUp": "Alles bijgewerkt",
+    "dismissFailed": "Outfit wegklikken mislukt",
+    "dismissLabel": "Outfit wegklikken",
+    "dismissed": "Outfit weggeklikt",
+    "lookbook": "Lookbook",
+    "noPending": "Geen outfits die op je antwoord wachten",
+    "title": "Openstaande outfits"
+  },
+  "quickActions": {
+    "addNewItem": "Nieuw stuk toevoegen",
+    "description": "Veelgebruikte acties om te starten",
+    "getOutfitSuggestion": "Outfitvoorstel krijgen",
+    "title": "Snelle acties"
+  },
+  "subtitle": "Dit gebeurt er in je kleerkast",
+  "userFallback": "Gebruiker",
+  "weather": {
+    "feelsLike": "voelt als {temp}",
+    "getOutfitSuggestion": "Outfitvoorstel krijgen",
+    "locationNotSet": "Locatie niet ingesteld",
+    "rainChance": "{percent}% kans op regen",
+    "setLocation": "Locatie instellen",
+    "title": "Het weer vandaag"
+  },
+  "weeklySummary": {
+    "accepted": "aanvaard",
+    "avgRatingValue": "Gem. score: {rating}/5",
+    "outfits": "outfits",
+    "title": "Deze week"
+  },
+  "welcomeBack": "Welkom terug, {name}"
+}

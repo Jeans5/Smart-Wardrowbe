@@ -1,0 +1,94 @@
+{
+  "bestCombinations": {
+    "description": "Stuks die je samen altijd goed vindt",
+    "title": "Je beste combinaties"
+  },
+  "colorPreferences": {
+    "description": "Kleuren die je vaak aanvaardt of afwijst",
+    "noData": "Nog niet genoeg feedback om je kleurvoorkeuren te bepalen.",
+    "title": "Geleerde kleurvoorkeuren"
+  },
+  "confidence": "{percent}% zekerheid",
+  "dismiss": "Wegklikken",
+  "insightCategoryColor": "Kleur",
+  "insightCategoryOccasion": "Gelegenheid",
+  "insightCategoryOverall": "Algemeen",
+  "insightCategoryStyle": "Stijl",
+  "insightCategoryWeather": "Weer",
+  "insightColorAvoidedDescription": "Je wijst outfits met {color} vaak af. We stellen alternatieven voor.",
+  "insightColorAvoidedTitle": "Geen fan van {color}",
+  "insightColorLovedDescription": "Je feedback toont een sterke voorkeur voor stuks in {color}. We geven die voorrang in je voorstellen.",
+  "insightColorLovedTitle": "Jij houdt van {color}!",
+  "insightGreatMatchDescription": "Je aanvaardt {percent} van onze voorstellen. We leren je stijl goed kennen!",
+  "insightGreatMatchTitle": "Goede match!",
+  "insightHelpUsLearnDescription": "Je hebt veel voorstellen afgewezen. Werk je voorkeuren bij om ons te helpen verbeteren.",
+  "insightHelpUsLearnTitle": "Help ons je stijl te leren",
+  "insightStyleLeaningDescription": "Op basis van je feedback ga je vaak voor {styles} stijlen.",
+  "insightStyleLeaningTitle": "Jouw stijl: {style}",
+  "interpretationDisliked": "niet goed",
+  "interpretationLiked": "goed",
+  "interpretationNeutral": "neutraal",
+  "interpretationStronglyDisliked": "helemaal niet goed",
+  "interpretationStronglyLiked": "heel goed",
+  "lastUpdated": "Leerprofiel laatst bijgewerkt: {date}",
+  "loadError": "Leergegevens laden mislukt. Probeer het opnieuw.",
+  "noData": {
+    "alreadyGaveFeedback": "Al feedback gegeven? Klik op \"Nu berekenen\" om ze te verwerken.",
+    "computeNow": "Nu berekenen",
+    "computing": "Bezig met berekenen...",
+    "description": "Begin met outfitvoorstellen te aanvaarden of af te wijzen en ze te beoordelen.",
+    "getOutfitSuggestions": "Outfitvoorstellen krijgen",
+    "title": "Nog geen leergegevens"
+  },
+  "occasionPatterns": {
+    "description": "Wat werkt voor verschillende gelegenheden",
+    "title": "Patronen per gelegenheid"
+  },
+  "percent": "{value}%",
+  "preferredColors": "Favoriete kleuren:",
+  "recompute": "Opnieuw berekenen",
+  "stats": {
+    "acceptanceRate": "Aanvaardingsgraad",
+    "averageRating": "Gemiddelde score",
+    "feedbackGiven": "Gegeven feedback",
+    "notEnoughData": "Niet genoeg gegevens",
+    "outOfStars": "op {max, plural, one {# ster} other {# sterren}}",
+    "outfitsRated": "{count, plural, one {{count} outfit beoordeeld} other {{count} outfits beoordeeld}}",
+    "rateMoreOutfits": "Beoordeel meer outfits",
+    "rateOutfitStyles": "Beoordeel outfitstijlen",
+    "styleRating": "Stijlscore",
+    "styleSatisfaction": "stijltevredenheid",
+    "suggestionsAccepted": "van de voorstellen aanvaard"
+  },
+  "styleInsights": {
+    "description": "Wat we over je voorkeuren geleerd hebben",
+    "generate": "Nieuwe inzichten",
+    "title": "Stijlinzichten"
+  },
+  "stylePreferences": {
+    "description": "Stijlen die bij je smaak passen",
+    "noData": "Nog niet genoeg feedback om je stijlvoorkeuren te bepalen.",
+    "title": "Geleerde stijlvoorkeuren"
+  },
+  "subtitle": "Hoe de AI leert van je feedback",
+  "subtitleEmpty": "Beoordeel outfits zodat de AI je voorkeuren leert kennen",
+  "successRate": "{percent}% succes",
+  "suggestedUpdates": {
+    "addToAvoid": "Toevoegen aan kleuren om te vermijden:",
+    "addToFavorites": "Toevoegen aan favoriete kleuren:",
+    "description": "Op basis van je feedback raden we aan je voorkeuren bij te werken",
+    "title": "Voorgestelde aanpassingen",
+    "updatePreferences": "Voorkeuren bijwerken"
+  },
+  "timesPaired": "{count}x gecombineerd",
+  "title": "AI-leren",
+  "weatherPreferences": {
+    "description": "Hoe je je kleedt bij verschillend weer",
+    "layers": "~{count} lagen",
+    "title": "Weervoorkeuren"
+  },
+  "weatherTypeCold": "Koud",
+  "weatherTypeCool": "Fris",
+  "weatherTypeHot": "Heet",
+  "weatherTypeMild": "Zacht"
+}

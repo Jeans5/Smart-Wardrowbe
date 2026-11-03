@@ -1,0 +1,148 @@
+{
+  "account": {
+    "description": "Je profielgegevens",
+    "email": "E-mail",
+    "name": "Naam",
+    "title": "Account"
+  },
+  "aiEndpoints": {
+    "active": "Actief",
+    "addEndpoint": "Endpoint toevoegen",
+    "connected": "Verbonden",
+    "description": "Stel AI-endpoints in voor beeldanalyse. Endpoints worden van boven naar onder geprobeerd.",
+    "disabled": "Uitgeschakeld",
+    "error": "Fout",
+    "fields": {
+      "name": "Naam",
+      "textModel": "Tekstmodel",
+      "url": "URL",
+      "visionModel": "Beeldmodel"
+    },
+    "modelsAvailable": "{count, plural, one {{count} model beschikbaar} other {{count} modellen beschikbaar}}",
+    "noEndpoints": "Geen eigen endpoints ingesteld. De standaardinstellingen van de server worden gebruikt.",
+    "placeholders": {
+      "name": "bv. Lokale Ollama"
+    },
+    "testConnection": "Verbinding testen",
+    "testFailed": "Endpoint testen mislukt",
+    "textModels": "Tekst: {models}",
+    "title": "AI-endpoints",
+    "visionModels": "Beeld: {models}"
+  },
+  "body": {
+    "bodyLabel": "Lichaam",
+    "description": "Help de AI outfits voor te stellen die beter passen",
+    "errors": {
+      "positiveNumber": "{field} moet een positief getal zijn"
+    },
+    "fields": {
+      "chest": "Borst",
+      "height": "Lengte",
+      "hips": "Heupen",
+      "inseam": "Binnenbeenlengte",
+      "waist": "Taille",
+      "weight": "Gewicht"
+    },
+    "imperial": "Imperiaal (in/lbs)",
+    "metric": "Metrisch (cm/kg)",
+    "saveError": "Maten opslaan mislukt",
+    "saveMeasurements": "Maten opslaan",
+    "saved": "Maten opgeslagen",
+    "sizeFields": {
+      "dressSize": "Kledingmaat jurk",
+      "pantsSize": "Broekmaat",
+      "shirtSize": "Hemdmaat",
+      "shoeSize": "Schoenmaat"
+    },
+    "sizePlaceholders": {
+      "dress_size": "bv. EU 38",
+      "pants_size": "bv. W32 L32, EU 48",
+      "shirt_size": "bv. M, L, XL",
+      "shoe_size": "bv. EU 43"
+    },
+    "sizesLabel": "Maten",
+    "title": "Lichaamsmaten",
+    "unitSystem": "Eenheden"
+  },
+  "colors": {
+    "colorsToAvoid": "Kleuren om te vermijden",
+    "description": "Kies kleuren die je graag draagt en kleuren om te vermijden in voorstellen",
+    "favoriteColors": "Favoriete kleuren"
+  },
+  "confirmReset": "Wil je echt alle voorkeuren terugzetten naar de standaardwaarden?",
+  "location": {
+    "approximateDetected": "Locatie bij benadering ingevuld. Controleer ze en sla op.",
+    "approximateDetectedWithReason": "{reason} Locatie bij benadering ingevuld. Controleer ze en sla op.",
+    "cityLabel": "Stad/locatie (optioneel)",
+    "cityPlaceholder": "bv. Gent, België",
+    "description": "Stel je locatie in voor outfitvoorstellen op basis van het weer",
+    "detected": "Locatie bepaald. Controleer ze en sla op.",
+    "errors": {
+      "geolocationDenied": "Toegang tot je locatie werd geweigerd.",
+      "geolocationFailed": "Exacte locatie bepalen mislukt: {message}",
+      "geolocationFailedGeneric": "Exacte locatie bepalen mislukt.",
+      "geolocationTimeout": "Het opvragen van je locatie duurde te lang.",
+      "geolocationUnavailable": "Je locatie is momenteel niet beschikbaar.",
+      "geolocationUnsupported": "Je browser ondersteunt geen locatiebepaling.",
+      "invalidCoordinates": "Vul geldige waarden in voor breedte- en lengtegraad",
+      "latitudeRange": "Breedtegraad moet tussen -90 en 90 liggen",
+      "longitudeRange": "Lengtegraad moet tussen -180 en 180 liggen",
+      "networkLookupFailed": "Locatie opzoeken via het netwerk mislukt ({status})",
+      "saveFailed": "Locatie opslaan mislukt. Probeer het opnieuw.",
+      "unableToDetect": "Je locatie kon niet bepaald worden."
+    },
+    "latitude": "Breedtegraad",
+    "longitude": "Lengtegraad",
+    "required": "Een locatie is nodig voor outfitvoorstellen op basis van het weer.",
+    "saveLocation": "Locatie opslaan",
+    "saved": "Locatie en tijdzone opgeslagen",
+    "selectTimezone": "Kies een tijdzone",
+    "timezone": "Tijdzone",
+    "title": "Locatie",
+    "useMyLocation": "Mijn locatie gebruiken"
+  },
+  "recommendations": {
+    "avoidRepeatDays": "Herhaling van stuks vermijden binnen (dagen)",
+    "defaultOccasion": "Standaardgelegenheid",
+    "description": "Stel in hoe outfitvoorstellen gemaakt worden",
+    "no": "Nee",
+    "preferUnderused": "Weinig gedragen stuks voorrang geven",
+    "title": "Instellingen voor voorstellen",
+    "varietyLevel": "Variatie",
+    "varietyOptions": {
+      "high": "Hoog (probeer nieuwe combinaties)",
+      "low": "Laag (blijf bij favorieten)",
+      "moderate": "Gemiddeld"
+    },
+    "yes": "Ja"
+  },
+  "reset": "Terugzetten",
+  "styleProfile": {
+    "description": "Stel in hoeveel je van elke stijl houdt in outfitvoorstellen",
+    "title": "Stijlprofiel"
+  },
+  "subtitle": "Beheer je voorkeuren en accountinstellingen",
+  "temperature": {
+    "celsius": "Celsius",
+    "coldThreshold": "Grens voor koud ({unit})",
+    "description": "Stel in hoe voorstellen zich aanpassen aan het weer",
+    "fahrenheit": "Fahrenheit",
+    "hotThreshold": "Grens voor warm ({unit})",
+    "layering": "Voorkeur voor laagjes",
+    "layeringOptions": {
+      "heavy": "Veel laagjes",
+      "minimal": "Weinig laagjes",
+      "moderate": "Gemiddeld aantal laagjes"
+    },
+    "sensitivity": "Gevoeligheid voor temperatuur",
+    "sensitivityOptions": {
+      "high": "Ik heb snel koud",
+      "low": "Ik heb snel warm",
+      "normal": "Normaal"
+    },
+    "title": "Temperatuur en comfort",
+    "unit": "Temperatuureenheid"
+  },
+  "title": "Instellingen",
+  "unsavedChanges": "Je hebt niet-opgeslagen wijzigingen. Deze pagina verlaten?"
+}

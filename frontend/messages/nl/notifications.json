@@ -1,0 +1,99 @@
+{
+  "channels": {
+    "addChannel": "Kanaal toevoegen",
+    "addFailed": "Kanaal toevoegen mislukt",
+    "channelAdded": "Kanaal toegevoegd",
+    "channelDeleted": "Kanaal verwijderd",
+    "channelDisabled": "Kanaal uitgeschakeld",
+    "channelEnabled": "Kanaal ingeschakeld",
+    "channelType": "Soort kanaal",
+    "deleteConfirm": {
+      "description": "Dit verwijdert dit meldingskanaal en stopt alle meldingen die erlangs verstuurd worden.",
+      "title": "Meldingskanaal verwijderen?"
+    },
+    "description": "Voeg kanalen toe om je dagelijkse outfitvoorstellen te ontvangen",
+    "dialog": {
+      "description": "Stel een nieuwe manier in om outfitvoorstellen te ontvangen.",
+      "title": "Meldingskanaal"
+    },
+    "fields": {
+      "accessToken": "Toegangstoken",
+      "emailAddress": "E-mailadres *",
+      "serverUrl": "Server-URL",
+      "topic": "Topic *",
+      "webhookUrl": "Webhook-URL *"
+    },
+    "helpers": {
+      "accessTokenOptional": "Nodig als je ntfy-server authenticatie gebruikt",
+      "accessTokenServerDefault": "Laat leeg om het toegangstoken van deze server te gebruiken",
+      "mattermostWebhook": "Maak een inkomende webhook aan in de Mattermost-instellingen",
+      "topicSubscribe": "Abonneer je op dit topic in je ntfy-app"
+    },
+    "invalidConfig": "Ongeldige instellingen",
+    "invalidConfigHint": "Deze instellingen worden niet meer aanvaard, dus er wordt niets via dit kanaal verstuurd. Verwijder het en voeg het opnieuw toe.",
+    "mobileAppRegistered": "Geregistreerd via de mobiele app",
+    "noChannels": "Geen meldingskanalen ingesteld",
+    "noChannelsDesc": "Voeg een kanaal toe om outfitvoorstellen te ontvangen",
+    "placeholders": {
+      "accessToken": "tk_...",
+      "emailAddress": "jij@voorbeeld.be"
+    },
+    "priority": "Prioriteit {level}",
+    "test": "Testen",
+    "testFailed": "Testmelding versturen mislukt",
+    "testSent": "Testmelding verstuurd",
+    "title": "Meldingskanalen",
+    "types": {
+      "email": "E-mail",
+      "expo_push": "Pushmelding mobiele app",
+      "mattermost": "Mattermost",
+      "ntfy": "ntfy-pushmeldingen"
+    },
+    "validation": {
+      "emailRequired": "E-mailadres is verplicht",
+      "topicRequired": "Topic is verplicht voor ntfy",
+      "webhookRequired": "Webhook-URL is verplicht voor Mattermost"
+    },
+    "webhookConfigured": "Webhook ingesteld"
+  },
+  "days": {
+    "friday": "Vrijdag",
+    "monday": "Maandag",
+    "saturday": "Zaterdag",
+    "sunday": "Zondag",
+    "thursday": "Donderdag",
+    "tuesday": "Dinsdag",
+    "wednesday": "Woensdag"
+  },
+  "deleteFailed": "Verwijderen mislukt",
+  "schedule": {
+    "addFailed": "Planning toevoegen mislukt",
+    "addSchedule": "Planning toevoegen",
+    "dayLabel": "Dag",
+    "deleteConfirm": {
+      "description": "Dit verwijdert deze verzendplanning.",
+      "title": "Planning verwijderen?"
+    },
+    "description": "Stel in wanneer je elke dag outfitvoorstellen wilt ontvangen",
+    "dialogDescription": "Stel in wanneer je outfitvoorstellen wilt ontvangen.",
+    "noSchedules": "Geen planningen ingesteld",
+    "noSchedulesDesc": "Voeg een planning toe om dagelijks outfitvoorstellen te krijgen",
+    "notifyDayBefore": "De dag ervoor melden",
+    "notifyDayBeforeDesc": "Krijg de avond ervoor een melding met de weersvoorspelling van morgen",
+    "notifyDayBeforeInfo": "Je krijgt de melding op {notifyDay} om {time} voor je outfit van {outfitDay}.",
+    "notifyDayEvening": "{day}avond",
+    "occasionLabel": "Gelegenheid",
+    "scheduleAdded": "Planning toegevoegd",
+    "scheduleDeleted": "Planning verwijderd",
+    "scheduleDisabled": "Planning uitgeschakeld",
+    "scheduleEnabled": "Planning ingeschakeld",
+    "summary": "{time} - {occasion}",
+    "timeLabel": "Uur",
+    "title": "Verzendplanning",
+    "willNotifyDayBefore": "Meldt de dag ervoor",
+    "willNotifySameDay": "Meldt dezelfde dag"
+  },
+  "subtitle": "Stel in hoe en wanneer je outfitvoorstellen ontvangt",
+  "title": "Meldingen",
+  "updateFailed": "Bijwerken mislukt"
+}

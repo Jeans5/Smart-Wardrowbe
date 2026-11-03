@@ -1,0 +1,28 @@
+# Builds the app from this fork's own code instead of pulling the upstream images from
+# ghcr.io/anyesh, so changes made in this repo (such as the Dutch translation) end up in
+# the running app. Docker Compose loads this file automatically next to docker-compose.yml,
+# so `docker compose up -d --build` is all it takes. The first build takes a while.
+
+x-local-backend: &local-backend
+  image: smart-wardrowbe-backend:local
+  pull_policy: build
+  build:
+    context: ./backend
+    dockerfile: Dockerfile
+
+services:
+  backend:
+    <<: *local-backend
+
+  worker:
+    <<: *local-backend
+
+  image-worker:
+    <<: *local-backend
+
+  frontend:
+    image: smart-wardrowbe-frontend:local
+    pull_policy: build
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile

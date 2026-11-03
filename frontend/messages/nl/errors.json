@@ -1,0 +1,13 @@
+{
+  "default": "Er ging iets mis. Probeer het opnieuw.",
+  "invite": {
+    "alreadyInFamily": "Je zit al in een gezin.",
+    "emailNotVerified": "Je aanmeldprovider heeft je e-mailadres niet geverifieerd. Verifieer het daar en meld je opnieuw aan om deze uitnodiging te aanvaarden.",
+    "invalidLink": "Deze uitnodigingslink is ongeldig of verlopen.",
+    "wrongEmail": "Deze uitnodiging is naar een ander e-mailadres gestuurd."
+  },
+  "pageLoad": {
+    "description": "Er ging iets mis bij het laden van deze inhoud. Dit is mogelijk tijdelijk.",
+    "title": "Deze pagina kon niet geladen worden"
+  }
+}
