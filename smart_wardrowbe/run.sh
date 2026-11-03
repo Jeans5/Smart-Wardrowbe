@@ -140,7 +140,9 @@ done
 log "Starting the web interface on ${APP_URL}"
 cd /frontend
 BACKEND_URL=http://127.0.0.1:8000 \
-NEXTAUTH_URL="$APP_URL" \
+# No NEXTAUTH_URL: sign-in follows the address the browser used, so the app works both on
+# the home network and over a VPN such as Tailscale.
+AUTH_TRUST_HOST=true \
 NEXTAUTH_SECRET="$NEXTAUTH_SECRET" \
 DEV_MODE=true \
 HOUSEHOLD_PROFILES="$HOUSEHOLD_PROFILES" \

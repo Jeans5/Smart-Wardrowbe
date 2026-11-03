@@ -12,8 +12,8 @@ configuration:
   app_url:
     name: Adres van de app
     description: >-
-      Het adres waarop de tablet de app opent, met het IP-adres van Home Assistant,
-      bv. http://192.168.0.10:3000.
+      Het adres van de app thuis, bv. http://192.168.0.10:3000. Wordt gebruikt voor links in
+      meldingen; de app zelf werkt op elk adres waarop je ze opent, ook via Tailscale.
   ai_model:
     name: AI-model
     description: Gemini-model voor het herkennen van kleding en het maken van outfits.

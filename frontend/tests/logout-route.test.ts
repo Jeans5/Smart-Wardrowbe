@@ -52,6 +52,18 @@ describe('/auth/logout', () => {
     expect(response.headers.get('location')).toBe('https://wardrobe.example.com/login?loggedOut=1')
   })
 
+  it('returns to the address the browser used when AUTH_TRUST_HOST replaces NEXTAUTH_URL', async () => {
+    delete process.env.NEXTAUTH_URL
+    process.env.AUTH_TRUST_HOST = 'true'
+    const request = new NextRequest('http://0.0.0.0:3000/auth/logout', {
+      headers: new Headers({ host: '100.64.0.7:3000' }),
+    })
+
+    const response = await GET(request)
+
+    expect(response.headers.get('location')).toBe('http://100.64.0.7:3000/login?loggedOut=1')
+  })
+
   it('sends the user through TinyAuth logout with a redirect_uri back to the logged-out page', async () => {
     process.env.TINYAUTH_URL = 'https://auth.example.com/'
 

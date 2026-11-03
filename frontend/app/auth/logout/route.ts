@@ -16,8 +16,23 @@ function logoutTarget(loggedOutUrl: string) {
   return loggedOutUrl;
 }
 
+// With AUTH_TRUST_HOST and no NEXTAUTH_URL the app answers on several addresses (the home network
+// and a VPN, say), so the logout must return to the address the browser used. The standalone
+// server reports its bind address (0.0.0.0) as nextUrl.origin, so the Host header is read instead.
+function requestOrigin(request: NextRequest) {
+  if (process.env.AUTH_TRUST_HOST) {
+    const host = request.headers.get('x-forwarded-host') ?? request.headers.get('host');
+    if (host) {
+      const proto =
+        request.headers.get('x-forwarded-proto') ?? request.nextUrl.protocol.replace(/:$/, '');
+      return `${proto === 'https' ? 'https' : 'http'}://${host}`;
+    }
+  }
+  return request.nextUrl.origin;
+}
+
 export async function GET(request: NextRequest) {
-  const appUrl = process.env.NEXTAUTH_URL?.replace(/\/+$/, '') || request.nextUrl.origin;
+  const appUrl = process.env.NEXTAUTH_URL?.replace(/\/+$/, '') || requestOrigin(request);
   const response = NextResponse.redirect(logoutTarget(`${appUrl}/login?loggedOut=1`), 302);
   clearSessionCookies(request, response);
   return response;

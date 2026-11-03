@@ -26,6 +26,12 @@ Open het adres van de app op de tablet en kies in de browser **Toevoegen aan beg
 - **Gezin:** maak bij *Gezin* een gezin aan en deel de uitnodigingscode, dan zien jullie elkaars
   outfits.
 
+## Buitenshuis (4G)
+
+Gebruik de **Tailscale**-app voor Home Assistant en de Tailscale-app op je gsm. Open dan
+`http://<Tailscale-IP van Home Assistant>:3000`. Zet de app nooit rechtstreeks open op het
+internet: er is geen wachtwoord.
+
 ## Goed om te weten
 
 - **Geen wachtwoord.** Iedereen op je wifi kan de app openen. Zet poort 3000 niet open naar het
